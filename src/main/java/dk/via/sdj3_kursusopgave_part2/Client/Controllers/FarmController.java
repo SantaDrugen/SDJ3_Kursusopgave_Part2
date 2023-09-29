@@ -2,6 +2,8 @@ package dk.via.sdj3_kursusopgave_part2.Client.Controllers;
 
 import dk.via.sdj3_kursusopgave_part2.AnimalServer.IServer;
 import dk.via.sdj3_kursusopgave_part2.AnimalServer.Server;
+import dk.via.sdj3_kursusopgave_part2.Client.Exceptions.FarmDoesNotExistException;
+import dk.via.sdj3_kursusopgave_part2.Client.Exceptions.FarmNameCannotBeNullException;
 import dk.via.sdj3_kursusopgave_part2.Shared.DTOs.FarmDto;
 import dk.via.sdj3_kursusopgave_part2.Shared.Domain.Farm;
 import org.springframework.http.ResponseEntity;
@@ -27,9 +29,18 @@ public class FarmController {
 
 
     @PostMapping
-    public void createFarm(@RequestBody FarmDto farm)
+    public ResponseEntity createFarm(@RequestBody FarmDto farm)
     {
-        server.createFarm(farm);
+        try {
+            server.createFarm(farm);
+            return ResponseEntity.ok().build();
+        } catch (Exception e) {
+            if(e.getMessage().equals("Farm name cannot be null"))
+            {
+                throw new FarmNameCannotBeNullException();
+            }
+        }
+        return ResponseEntity.badRequest().build();
     }
 
 

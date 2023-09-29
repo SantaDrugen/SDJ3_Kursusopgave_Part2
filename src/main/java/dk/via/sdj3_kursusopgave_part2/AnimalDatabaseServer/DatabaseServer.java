@@ -59,7 +59,7 @@ public class DatabaseServer implements IDatabaseServer {
     public void createAnimal(AnimalDto animal) {
         if ( getFarmById(animal.getFarmId() ) == null)
         {
-            throw new IllegalArgumentException("FarmId does not exist");
+            throw new RuntimeException("Farm does not exist");
         }
         else
         {

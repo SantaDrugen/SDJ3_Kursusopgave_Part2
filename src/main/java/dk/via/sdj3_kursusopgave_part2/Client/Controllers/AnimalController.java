@@ -2,6 +2,9 @@ package dk.via.sdj3_kursusopgave_part2.Client.Controllers;
 
 import dk.via.sdj3_kursusopgave_part2.AnimalServer.IServer;
 import dk.via.sdj3_kursusopgave_part2.AnimalServer.Server;
+import dk.via.sdj3_kursusopgave_part2.Client.Exceptions.FarmDoesNotExistException;
+import dk.via.sdj3_kursusopgave_part2.Client.Exceptions.FarmIdCannotBeZeroOrNegativeException;
+import dk.via.sdj3_kursusopgave_part2.Client.Exceptions.WeightCannotBeNegativeException;
 import dk.via.sdj3_kursusopgave_part2.Shared.DTOs.AnimalDto;
 import dk.via.sdj3_kursusopgave_part2.Shared.Domain.Animal;
 import org.springframework.http.ResponseEntity;
@@ -28,8 +31,24 @@ public class AnimalController {
     @PostMapping
     public ResponseEntity createAnimal(@RequestBody AnimalDto animal)
     {
-        server.createAnimal(animal);
-        return ResponseEntity.ok().build();
+        try{
+            server.createAnimal(animal);
+            return ResponseEntity.ok().build();
+        }
+        catch (Exception e)
+        {
+            if (e.getMessage().equals("Farm does not exist"))
+            {
+                throw new FarmDoesNotExistException();
+            }
+            else if (e.getMessage().equals("Weight cannot be negative")) {
+                throw new WeightCannotBeNegativeException();
+            } else if (e.getMessage().equals("FarmIdCannotBeZeroOrNegativeException")) {
+                throw new FarmIdCannotBeZeroOrNegativeException();
+            }
+
+        }
+        return ResponseEntity.badRequest().build();
     }
 
     @GetMapping
