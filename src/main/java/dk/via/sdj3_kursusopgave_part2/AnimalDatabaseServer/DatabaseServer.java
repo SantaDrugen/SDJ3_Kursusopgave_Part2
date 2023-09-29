@@ -4,9 +4,12 @@ import dk.via.sdj3_kursusopgave_part2.Shared.DTOs.AnimalDto;
 import dk.via.sdj3_kursusopgave_part2.Shared.DTOs.FarmDto;
 import dk.via.sdj3_kursusopgave_part2.Shared.Domain.Animal;
 import dk.via.sdj3_kursusopgave_part2.Shared.Domain.Farm;
+import org.springframework.format.datetime.DateFormatter;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
+import java.util.Locale;
 
 public class DatabaseServer implements IDatabaseServer {
 
@@ -24,7 +27,7 @@ public class DatabaseServer implements IDatabaseServer {
     public void createFarm(FarmDto farm)
     {
         Farm farmToAdd = new Farm(farm.getFarmName());
-        farmToAdd.setFarmId(createId());
+        farmToAdd.setFarmId(createFarmId());
         farms.add(farmToAdd);
         fileIO.addFarm(farms);
     }
@@ -54,11 +57,35 @@ public class DatabaseServer implements IDatabaseServer {
 
     @Override
     public void createAnimal(AnimalDto animal) {
-        animals.add(new Animal(animal.getFarm(), animal.getWeight()));
-        fileIO.addAnimals(animals);
+        if ( getFarmById(animal.getFarmId() ) == null)
+        {
+            throw new IllegalArgumentException("FarmId does not exist");
+        }
+        else
+        {
+            Animal animalToAdd = new Animal(getFarmById(animal.getFarmId()), animal.getWeight());
+            animalToAdd.setAnimalId(createAnimalId());
+            animalToAdd.setDate(createDate());
+            animals.add(animalToAdd);
+
+            fileIO.addAnimals(animals);
+        }
     }
 
-    public int createId()
+    private Farm getFarmById(int id)
+    {
+        Farm farmToGet = null;
+        for (Farm i : farms) {
+            if (i.getFarmId() == id)
+            {
+                farmToGet = i;
+                break;
+            }
+        }
+        return farmToGet;
+    }
+
+    public int createFarmId()
     {
         int currentHighestId = 0;
         for (Farm i : farms) {
@@ -68,5 +95,24 @@ public class DatabaseServer implements IDatabaseServer {
             }
         }
         return ++currentHighestId;
+    }
+
+    public int createAnimalId()
+    {
+        int currentHigestId = 0;
+        for (Animal i : animals) {
+            if (i.getAnimalId() > currentHigestId)
+            {
+                currentHigestId = i.getAnimalId();
+            }
+        }
+        return ++currentHigestId;
+    }
+
+    private String createDate()
+    {
+        DateFormatter dateFormatter = new DateFormatter();
+        dateFormatter.setPattern("dd-MM-yyyy");
+        return dateFormatter.print(new Date(), Locale.getDefault());
     }
 }

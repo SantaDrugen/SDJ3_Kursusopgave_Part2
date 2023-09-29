@@ -5,10 +5,7 @@ import dk.via.sdj3_kursusopgave_part2.AnimalServer.Server;
 import dk.via.sdj3_kursusopgave_part2.Shared.DTOs.AnimalDto;
 import dk.via.sdj3_kursusopgave_part2.Shared.Domain.Animal;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
 
@@ -29,7 +26,7 @@ public class AnimalController {
     }
 
     @PostMapping
-    public ResponseEntity createAnimal(AnimalDto animal)
+    public ResponseEntity createAnimal(@RequestBody AnimalDto animal)
     {
         server.createAnimal(animal);
         return ResponseEntity.ok().build();

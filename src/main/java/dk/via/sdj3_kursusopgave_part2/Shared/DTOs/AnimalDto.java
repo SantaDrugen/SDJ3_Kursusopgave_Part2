@@ -1,24 +1,33 @@
 package dk.via.sdj3_kursusopgave_part2.Shared.DTOs;
 
-import dk.via.sdj3_kursusopgave_part2.Shared.Domain.Farm;
-
 public class AnimalDto {
 
-    private Farm farm;
+    private int farmId;
     private double weight;
     private String dateOfArrival;
 
-    public AnimalDto(Farm farm, double weight) {
-        this.farm = farm;
+    public AnimalDto(int farmId, double weight) {
+        this.farmId = farmId;
         this.weight = weight;
     }
 
-    public Farm getFarm() {
-        return farm;
+    public AnimalDto() {
+    }
+
+    public int getFarmId() {
+        return farmId;
     }
 
     public double getWeight() {
         return weight;
+    }
+
+    public void setFarmId(int farmId) {
+        this.farmId = farmId;
+    }
+
+    public void setWeight(double weight) {
+        this.weight = weight;
     }
 
     public String getDateOfArrival() {

@@ -70,6 +70,11 @@ public class FileIO implements IFileIO{
         try {
             fileInputStreamAnimal = new FileInputStream(FILEPATHANIMAL);
             animalIn = new ObjectInputStream(fileInputStreamAnimal);
+            File file = new File(FILEPATHANIMAL);
+            if (file.length()==4)
+            {
+                return new ArrayList<Animal>();
+            }
             animals = (ArrayList<Animal>) animalIn.readObject();
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);

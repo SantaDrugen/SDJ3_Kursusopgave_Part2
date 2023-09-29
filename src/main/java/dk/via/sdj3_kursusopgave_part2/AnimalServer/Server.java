@@ -47,9 +47,9 @@ public class Server implements IServer {
         {
             throw new IllegalArgumentException("Weight cannot be negative");
         }
-        else if (animal.getFarm() == null)
+        else if (animal.getFarmId() < 1)
         {
-            throw new IllegalArgumentException("Farm cannot be null");
+            throw new IllegalArgumentException("FarmId cannot be 0 or negative");
         }
         else
         {
