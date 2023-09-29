@@ -18,4 +18,10 @@ public interface IDatabaseServer {
     public Collection<Animal> getAllAnimals();
 
     public void createAnimal(AnimalDto animal);
+
+    public Animal getAnimal(int animalId);
+
+    public Collection<Animal> getAllAnimalsByFarmId(int farmId);
+
+    public Collection<Animal> getAllAnimalsByDateOfArrival(String dateOfArrival);
 }

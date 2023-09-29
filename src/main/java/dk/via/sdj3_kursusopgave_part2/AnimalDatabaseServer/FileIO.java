@@ -44,14 +44,14 @@ public class FileIO implements IFileIO{
         ArrayList<Farm> farms = new ArrayList<>();
         try {
             fileInputStreamFarm = new FileInputStream(FILEPATHFARM);
-            farmIn = new ObjectInputStream(fileInputStreamFarm);
             File file = new File(FILEPATHFARM);
-            if (file.length()==4) //null
+            if (file.length()==0) //null
             {
                 return new ArrayList<Farm>();
             }
             else
             {
+                farmIn = new ObjectInputStream(fileInputStreamFarm);
                 farms = (ArrayList<Farm>) farmIn.readObject();
             }
         } catch (FileNotFoundException e) {
@@ -69,13 +69,16 @@ public class FileIO implements IFileIO{
         ArrayList<Animal> animals = new ArrayList<>();
         try {
             fileInputStreamAnimal = new FileInputStream(FILEPATHANIMAL);
-            animalIn = new ObjectInputStream(fileInputStreamAnimal);
             File file = new File(FILEPATHANIMAL);
-            if (file.length()==4)
+            if (file.length()==0)
             {
                 return new ArrayList<Animal>();
             }
-            animals = (ArrayList<Animal>) animalIn.readObject();
+            else
+            {
+                animalIn = new ObjectInputStream(fileInputStreamAnimal);
+                animals = (ArrayList<Animal>) animalIn.readObject();
+            }
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         } catch (IOException e) {

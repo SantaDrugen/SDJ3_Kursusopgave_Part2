@@ -31,4 +31,37 @@ public class AnimalController {
         server.createAnimal(animal);
         return ResponseEntity.ok().build();
     }
+
+    @GetMapping
+    @RequestMapping( params = "animalId" )
+    public ResponseEntity<Animal> getAnimal(@RequestParam int animalId) {
+        Animal animal = server.getAnimal(animalId);
+        if (animal != null) {
+            return ResponseEntity.ok(animal);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    @GetMapping
+    @RequestMapping( params = "farmId" )
+    public ResponseEntity<Collection<Animal>> getAnimalsFromFarm(@RequestParam int farmId) {
+        Collection<Animal> animals = server.getAllAnimalsByFarmId(farmId);
+        if (animals != null) {
+            return ResponseEntity.ok(animals);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    @GetMapping
+    @RequestMapping( params = "dateOfArrival" )
+    public ResponseEntity<Collection<Animal>> getAnimalsFromFarm(@RequestParam String dateOfArrival) {
+        Collection<Animal> animals = server.getAllAnimalsByDateOfArrival(dateOfArrival);
+        if (animals != null) {
+            return ResponseEntity.ok(animals);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
 }

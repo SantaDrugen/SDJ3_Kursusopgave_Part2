@@ -23,6 +23,10 @@ public class Server implements IServer {
 
     @Override
     public void createFarm(FarmDto farm) {
+        if (farm.getFarmName() == null)
+        {
+            throw new IllegalArgumentException("Farm name cannot be null");
+        }
         databaseServer.createFarm(farm);
     }
 
@@ -55,6 +59,21 @@ public class Server implements IServer {
         {
             databaseServer.createAnimal(animal);
         }
+    }
+
+    @Override
+    public Animal getAnimal(int animalId) {
+        return databaseServer.getAnimal(animalId);
+    }
+
+    @Override
+    public Collection<Animal> getAllAnimalsByFarmId(int farmId) {
+        return databaseServer.getAllAnimalsByFarmId(farmId);
+    }
+
+    @Override
+    public Collection<Animal> getAllAnimalsByDateOfArrival(String dateOfArrival) {
+        return databaseServer.getAllAnimalsByDateOfArrival(dateOfArrival);
     }
 
 

@@ -72,6 +72,43 @@ public class DatabaseServer implements IDatabaseServer {
         }
     }
 
+    @Override
+    public Animal getAnimal(int animalId) {
+        Animal animalToGet = null;
+        for (Animal i : animals) {
+            if (i.getAnimalId() == animalId)
+            {
+                animalToGet = i;
+                break;
+            }
+        }
+        return animalToGet;
+    }
+
+    @Override
+    public Collection<Animal> getAllAnimalsByFarmId(int farmId) {
+        ArrayList<Animal> animalsToGet = new ArrayList<>();
+        for (Animal i : animals) {
+            if (i.getFarm().getFarmId() == farmId)
+            {
+                animalsToGet.add(i);
+            }
+        }
+        return animalsToGet;
+    }
+
+    @Override
+    public Collection<Animal> getAllAnimalsByDateOfArrival(String dateOfArrival) {
+        ArrayList<Animal> animalsToGet = new ArrayList<>();
+        for (Animal i : animals) {
+            if (i.getDate().equals(dateOfArrival))
+            {
+                animalsToGet.add(i);
+            }
+        }
+        return animalsToGet;
+    }
+
     private Farm getFarmById(int id)
     {
         Farm farmToGet = null;
