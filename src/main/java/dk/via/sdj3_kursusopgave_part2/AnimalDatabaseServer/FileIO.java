@@ -45,7 +45,15 @@ public class FileIO implements IFileIO{
         try {
             fileInputStreamFarm = new FileInputStream(FILEPATHFARM);
             farmIn = new ObjectInputStream(fileInputStreamFarm);
-            farms = (ArrayList<Farm>) farmIn.readObject();
+            File file = new File(FILEPATHFARM);
+            if (file.length()==4) //null
+            {
+                return new ArrayList<Farm>();
+            }
+            else
+            {
+                farms = (ArrayList<Farm>) farmIn.readObject();
+            }
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         } catch (IOException e) {
