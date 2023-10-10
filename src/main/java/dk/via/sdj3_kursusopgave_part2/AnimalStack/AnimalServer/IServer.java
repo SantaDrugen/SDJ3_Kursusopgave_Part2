@@ -1,4 +1,4 @@
-package dk.via.sdj3_kursusopgave_part2.AnimalDatabaseServer;
+package dk.via.sdj3_kursusopgave_part2.AnimalStack.AnimalServer;
 
 import dk.via.sdj3_kursusopgave_part2.Shared.DTOs.AnimalDto;
 import dk.via.sdj3_kursusopgave_part2.Shared.DTOs.FarmDto;
@@ -7,7 +7,7 @@ import dk.via.sdj3_kursusopgave_part2.Shared.Domain.Farm;
 
 import java.util.Collection;
 
-public interface IDatabaseServer {
+public interface IServer {
 
     public void createFarm(FarmDto farm);
 

@@ -1,7 +1,7 @@
-package dk.via.sdj3_kursusopgave_part2.Client.Controllers;
+package dk.via.sdj3_kursusopgave_part2.AnimalStack.AnimalClient.Controllers;
 
-import dk.via.sdj3_kursusopgave_part2.AnimalServer.IServer;
-import dk.via.sdj3_kursusopgave_part2.AnimalServer.Server;
+import dk.via.sdj3_kursusopgave_part2.AnimalStack.AnimalServer.IServer;
+import dk.via.sdj3_kursusopgave_part2.AnimalStack.AnimalServer.Server;
 import dk.via.sdj3_kursusopgave_part2.Shared.DTOs.AnimalDto;
 import dk.via.sdj3_kursusopgave_part2.Shared.Domain.Animal;
 import org.springframework.http.ResponseEntity;

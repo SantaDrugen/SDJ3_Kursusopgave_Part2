@@ -1,6 +1,5 @@
-package dk.via.sdj3_kursusopgave_part2.AnimalDatabaseServer;
+package dk.via.sdj3_kursusopgave_part2.AnimalStack.AnimalDatabaseServer;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import dk.via.sdj3_kursusopgave_part2.Shared.Domain.Animal;
 import dk.via.sdj3_kursusopgave_part2.Shared.Domain.Farm;
 

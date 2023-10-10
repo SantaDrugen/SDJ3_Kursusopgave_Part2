@@ -1,7 +1,7 @@
-package dk.via.sdj3_kursusopgave_part2.AnimalServer;
+package dk.via.sdj3_kursusopgave_part2.AnimalStack.AnimalServer;
 
-import dk.via.sdj3_kursusopgave_part2.AnimalDatabaseServer.DatabaseServer;
-import dk.via.sdj3_kursusopgave_part2.AnimalDatabaseServer.IDatabaseServer;
+import dk.via.sdj3_kursusopgave_part2.AnimalStack.AnimalDatabaseServer.DatabaseServer;
+import dk.via.sdj3_kursusopgave_part2.AnimalStack.AnimalDatabaseServer.IDatabaseServer;
 import dk.via.sdj3_kursusopgave_part2.Shared.DTOs.AnimalDto;
 import dk.via.sdj3_kursusopgave_part2.Shared.DTOs.FarmDto;
 import dk.via.sdj3_kursusopgave_part2.Shared.Domain.Animal;

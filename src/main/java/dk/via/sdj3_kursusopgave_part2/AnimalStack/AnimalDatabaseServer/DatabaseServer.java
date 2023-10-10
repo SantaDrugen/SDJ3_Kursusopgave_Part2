@@ -1,9 +1,13 @@
-package dk.via.sdj3_kursusopgave_part2.AnimalDatabaseServer;
+package dk.via.sdj3_kursusopgave_part2.AnimalStack.AnimalDatabaseServer;
 
+import dk.via.sdj3_kursusopgave_part2.AnimalServiceGrpc;
+import dk.via.sdj3_kursusopgave_part2.CreateFarmRequest;
+import dk.via.sdj3_kursusopgave_part2.CreateFarmResponse;
 import dk.via.sdj3_kursusopgave_part2.Shared.DTOs.AnimalDto;
 import dk.via.sdj3_kursusopgave_part2.Shared.DTOs.FarmDto;
 import dk.via.sdj3_kursusopgave_part2.Shared.Domain.Animal;
 import dk.via.sdj3_kursusopgave_part2.Shared.Domain.Farm;
+import io.grpc.stub.StreamObserver;
 import org.springframework.format.datetime.DateFormatter;
 
 import java.util.ArrayList;
@@ -11,7 +15,7 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.Locale;
 
-public class DatabaseServer implements IDatabaseServer {
+public class DatabaseServer extends AnimalServiceGrpc.AnimalServiceImplBase implements IDatabaseServer {
 
     private Collection<Farm> farms;
     private Collection<Animal> animals;
@@ -23,13 +27,23 @@ public class DatabaseServer implements IDatabaseServer {
         farms = fileIO.loadFarms();
         animals = fileIO.loadAnimals();
     }
-
     public void createFarm(FarmDto farm)
     {
         Farm farmToAdd = new Farm(farm.getFarmName());
         farmToAdd.setFarmId(createFarmId());
         farms.add(farmToAdd);
         fileIO.addFarm(farms);
+    }
+
+    public void createFarm(CreateFarmRequest request,
+                           StreamObserver<CreateFarmResponse> responseObserver) {
+        Farm farm = new Farm(request.getFarmName());
+        farm.setFarmId(createFarmId());
+        fileIO.addFarm(farms);
+        farms.add(farm);
+        CreateFarmResponse response = CreateFarmResponse.newBuilder().build();
+        responseObserver.onNext(response);
+        responseObserver.onCompleted();
     }
 
     @Override

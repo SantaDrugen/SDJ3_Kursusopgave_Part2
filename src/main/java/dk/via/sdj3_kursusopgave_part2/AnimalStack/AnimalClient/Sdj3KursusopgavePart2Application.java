@@ -1,9 +1,7 @@
-package dk.via.sdj3_kursusopgave_part2.Client;
+package dk.via.sdj3_kursusopgave_part2.AnimalStack.AnimalClient;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-
-import java.io.File;
 
 @SpringBootApplication
 public class Sdj3KursusopgavePart2Application {
