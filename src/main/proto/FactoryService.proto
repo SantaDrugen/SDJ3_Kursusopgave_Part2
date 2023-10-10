@@ -1,0 +1,27 @@
+syntax = "proto3";
+option java_multiple_files = true;
+
+package dk.via.sdj3_kursusopgave_part2;
+
+message AnimalList {
+  repeated string animalId = 1;
+}
+
+message ProductList {
+  repeated string productId = 1;
+}
+
+
+message GetInfectedProductAndAnimalRequest {
+  string animalId = 1;
+  string productId = 2;
+}
+
+message GetInfectedProductAndAnimalResponse {
+  AnimalList animal = 1;
+  ProductList product = 2;
+}
+
+service InfectedService {
+  rpc getInfectedProductAndAnimal(GetInfectedProductAndAnimalRequest) returns (GetInfectedProductAndAnimalResponse);
+}
