@@ -39,8 +39,8 @@ public class DatabaseServer extends AnimalServiceGrpc.AnimalServiceImplBase impl
                            StreamObserver<CreateFarmResponse> responseObserver) {
         Farm farm = new Farm(request.getFarmName());
         farm.setFarmId(createFarmId());
-        fileIO.addFarm(farms);
         farms.add(farm);
+        fileIO.addFarm(farms);
         CreateFarmResponse response = CreateFarmResponse.newBuilder().build();
         responseObserver.onNext(response);
         responseObserver.onCompleted();

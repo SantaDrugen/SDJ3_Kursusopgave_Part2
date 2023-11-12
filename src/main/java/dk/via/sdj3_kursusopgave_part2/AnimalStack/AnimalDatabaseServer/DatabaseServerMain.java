@@ -8,7 +8,7 @@ import java.io.IOException;
 public class DatabaseServerMain {
     public static void main(String[] args) {
         Server server = ServerBuilder
-                .forPort(8080)
+                .forPort(1234)
                 .addService(new DatabaseServer())
                 .build();
 

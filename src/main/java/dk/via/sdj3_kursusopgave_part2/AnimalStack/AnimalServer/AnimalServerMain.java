@@ -12,7 +12,7 @@ public class AnimalServerMain {
         Server server = new Server();
 
         ManagedChannel managedChannel = ManagedChannelBuilder
-                .forAddress("localhost", 8080)
+                .forAddress("localhost", 1234)
                 .usePlaintext()
                 .build();
 
