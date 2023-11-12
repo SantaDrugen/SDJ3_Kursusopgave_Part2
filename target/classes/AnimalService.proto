@@ -1,0 +1,25 @@
+syntax = "proto3";
+option java_multiple_files = true;
+
+package dk.via.sdj3_kursusopgave_part2;
+
+message CreateFarmRequest {
+    string farmName = 1;
+}
+
+message CreateFarmResponse {
+}
+
+message CreateAnimalRequest {
+    int32 farmId = 1;
+    double weight = 2;
+}
+
+message CreateAnimalResponse {
+}
+
+
+service AnimalService {
+    rpc createFarm(CreateFarmRequest) returns (CreateFarmResponse);
+    rpc CreateAnimal(CreateAnimalRequest) returns (CreateAnimalResponse);
+}
