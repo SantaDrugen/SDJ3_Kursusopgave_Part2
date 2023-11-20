@@ -37,12 +37,12 @@ public class WebAPI_GRPC_Client implements IServer {
         GetAllAnimalCutsResponse response = stub.getAllAnimalCuts(request);
 
 
-        channel.shutdown();
-
         ArrayList<AnimalCut> animalCuts = new ArrayList<AnimalCut>();
-        for (Object o:response.getAnimalCutsList()) {
-            animalCuts.add((AnimalCut) o);
+        for (dk.via.sdj3_kursusopgave_part2.AnimalCut o:response.getAnimalCutsList()) {
+            animalCuts.add(new AnimalCut(o.getCutId()));
         }
+
+        channel.shutdown();
 
         return animalCuts;
     }

@@ -2,7 +2,6 @@ package dk.via.sdj3_kursusopgave_part2.SlaughterHouseStack.WebAPIClient.Controll
 
 import dk.via.sdj3_kursusopgave_part2.Shared.Domain.AnimalCut;
 import dk.via.sdj3_kursusopgave_part2.SlaughterHouseStack.IServer;
-import dk.via.sdj3_kursusopgave_part2.SlaughterHouseStack.WebAPIClient.WebAPI_GRPC_Client;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.ResponseEntity;
@@ -26,6 +25,7 @@ public class SlaughterController {
     @GetMapping
     public ResponseEntity<Collection<AnimalCut>> getAllAnimalCuts()
     {
-        return ResponseEntity.ok().build();
+        Collection<AnimalCut> body = server.getAllAnimalCuts();
+        return ResponseEntity.ok().body(body);
     }
 }

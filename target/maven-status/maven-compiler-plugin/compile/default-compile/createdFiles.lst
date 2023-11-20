@@ -1,5 +1,6 @@
 dk\via\sdj3_kursusopgave_part2\AnimalStack\AnimalClient\Controllers\AnimalController.class
 dk\via\sdj3_kursusopgave_part2\CreateFarmResponseOrBuilder.class
+dk\via\sdj3_kursusopgave_part2\SlaughterHouseStack\BusinessServer\Slaughter_Business_Server.class
 dk\via\sdj3_kursusopgave_part2\InfectedServiceGrpc$MethodHandlers.class
 dk\via\sdj3_kursusopgave_part2\ProductListOrBuilder.class
 dk\via\sdj3_kursusopgave_part2\SlaughterServiceGrpc$SlaughterServiceBlockingStub.class
@@ -13,6 +14,7 @@ dk\via\sdj3_kursusopgave_part2\SlaughterServiceGrpc$SlaughterServiceDescriptorSu
 dk\via\sdj3_kursusopgave_part2\ProductList$1.class
 dk\via\sdj3_kursusopgave_part2\SlaughterHouseStack\IServer.class
 dk\via\sdj3_kursusopgave_part2\GetInfectedProductAndAnimalRequest.class
+dk\via\sdj3_kursusopgave_part2\SlaughterHouseStack\Config.class
 dk\via\sdj3_kursusopgave_part2\AnimalServiceOuterClass.class
 dk\via\sdj3_kursusopgave_part2\ProductList.class
 dk\via\sdj3_kursusopgave_part2\InfectedServiceGrpc$InfectedServiceFutureStub.class
