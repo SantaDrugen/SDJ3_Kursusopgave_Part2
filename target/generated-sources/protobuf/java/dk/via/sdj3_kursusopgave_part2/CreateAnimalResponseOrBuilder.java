@@ -6,4 +6,14 @@ package dk.via.sdj3_kursusopgave_part2;
 public interface CreateAnimalResponseOrBuilder extends
     // @@protoc_insertion_point(interface_extends:dk.via.sdj3_kursusopgave_part2.CreateAnimalResponse)
     com.google.protobuf.MessageOrBuilder {
+
+  /**
+   * <code>string message = 1;</code>
+   */
+  java.lang.String getMessage();
+  /**
+   * <code>string message = 1;</code>
+   */
+  com.google.protobuf.ByteString
+      getMessageBytes();
 }

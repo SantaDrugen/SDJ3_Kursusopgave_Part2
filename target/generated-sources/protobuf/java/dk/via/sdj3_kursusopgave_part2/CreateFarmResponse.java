@@ -27,6 +27,7 @@ public  final class CreateFarmResponse extends
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     this();
+    int mutable_bitField0_ = 0;
     try {
       boolean done = false;
       while (!done) {
@@ -39,6 +40,19 @@ public  final class CreateFarmResponse extends
             if (!input.skipField(tag)) {
               done = true;
             }
+            break;
+          }
+          case 10: {
+            dk.via.sdj3_kursusopgave_part2.FarmMessage.Builder subBuilder = null;
+            if (farmMessage_ != null) {
+              subBuilder = farmMessage_.toBuilder();
+            }
+            farmMessage_ = input.readMessage(dk.via.sdj3_kursusopgave_part2.FarmMessage.parser(), extensionRegistry);
+            if (subBuilder != null) {
+              subBuilder.mergeFrom(farmMessage_);
+              farmMessage_ = subBuilder.buildPartial();
+            }
+
             break;
           }
         }
@@ -64,6 +78,27 @@ public  final class CreateFarmResponse extends
             dk.via.sdj3_kursusopgave_part2.CreateFarmResponse.class, dk.via.sdj3_kursusopgave_part2.CreateFarmResponse.Builder.class);
   }
 
+  public static final int FARMMESSAGE_FIELD_NUMBER = 1;
+  private dk.via.sdj3_kursusopgave_part2.FarmMessage farmMessage_;
+  /**
+   * <code>.dk.via.sdj3_kursusopgave_part2.FarmMessage farmMessage = 1;</code>
+   */
+  public boolean hasFarmMessage() {
+    return farmMessage_ != null;
+  }
+  /**
+   * <code>.dk.via.sdj3_kursusopgave_part2.FarmMessage farmMessage = 1;</code>
+   */
+  public dk.via.sdj3_kursusopgave_part2.FarmMessage getFarmMessage() {
+    return farmMessage_ == null ? dk.via.sdj3_kursusopgave_part2.FarmMessage.getDefaultInstance() : farmMessage_;
+  }
+  /**
+   * <code>.dk.via.sdj3_kursusopgave_part2.FarmMessage farmMessage = 1;</code>
+   */
+  public dk.via.sdj3_kursusopgave_part2.FarmMessageOrBuilder getFarmMessageOrBuilder() {
+    return getFarmMessage();
+  }
+
   private byte memoizedIsInitialized = -1;
   public final boolean isInitialized() {
     byte isInitialized = memoizedIsInitialized;
@@ -76,6 +111,9 @@ public  final class CreateFarmResponse extends
 
   public void writeTo(com.google.protobuf.CodedOutputStream output)
                       throws java.io.IOException {
+    if (farmMessage_ != null) {
+      output.writeMessage(1, getFarmMessage());
+    }
   }
 
   public int getSerializedSize() {
@@ -83,6 +121,10 @@ public  final class CreateFarmResponse extends
     if (size != -1) return size;
 
     size = 0;
+    if (farmMessage_ != null) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeMessageSize(1, getFarmMessage());
+    }
     memoizedSize = size;
     return size;
   }
@@ -99,6 +141,11 @@ public  final class CreateFarmResponse extends
     dk.via.sdj3_kursusopgave_part2.CreateFarmResponse other = (dk.via.sdj3_kursusopgave_part2.CreateFarmResponse) obj;
 
     boolean result = true;
+    result = result && (hasFarmMessage() == other.hasFarmMessage());
+    if (hasFarmMessage()) {
+      result = result && getFarmMessage()
+          .equals(other.getFarmMessage());
+    }
     return result;
   }
 
@@ -109,6 +156,10 @@ public  final class CreateFarmResponse extends
     }
     int hash = 41;
     hash = (19 * hash) + getDescriptor().hashCode();
+    if (hasFarmMessage()) {
+      hash = (37 * hash) + FARMMESSAGE_FIELD_NUMBER;
+      hash = (53 * hash) + getFarmMessage().hashCode();
+    }
     hash = (29 * hash) + unknownFields.hashCode();
     memoizedHashCode = hash;
     return hash;
@@ -238,6 +289,12 @@ public  final class CreateFarmResponse extends
     }
     public Builder clear() {
       super.clear();
+      if (farmMessageBuilder_ == null) {
+        farmMessage_ = null;
+      } else {
+        farmMessage_ = null;
+        farmMessageBuilder_ = null;
+      }
       return this;
     }
 
@@ -260,6 +317,11 @@ public  final class CreateFarmResponse extends
 
     public dk.via.sdj3_kursusopgave_part2.CreateFarmResponse buildPartial() {
       dk.via.sdj3_kursusopgave_part2.CreateFarmResponse result = new dk.via.sdj3_kursusopgave_part2.CreateFarmResponse(this);
+      if (farmMessageBuilder_ == null) {
+        result.farmMessage_ = farmMessage_;
+      } else {
+        result.farmMessage_ = farmMessageBuilder_.build();
+      }
       onBuilt();
       return result;
     }
@@ -301,6 +363,9 @@ public  final class CreateFarmResponse extends
 
     public Builder mergeFrom(dk.via.sdj3_kursusopgave_part2.CreateFarmResponse other) {
       if (other == dk.via.sdj3_kursusopgave_part2.CreateFarmResponse.getDefaultInstance()) return this;
+      if (other.hasFarmMessage()) {
+        mergeFarmMessage(other.getFarmMessage());
+      }
       onChanged();
       return this;
     }
@@ -325,6 +390,123 @@ public  final class CreateFarmResponse extends
         }
       }
       return this;
+    }
+
+    private dk.via.sdj3_kursusopgave_part2.FarmMessage farmMessage_ = null;
+    private com.google.protobuf.SingleFieldBuilderV3<
+        dk.via.sdj3_kursusopgave_part2.FarmMessage, dk.via.sdj3_kursusopgave_part2.FarmMessage.Builder, dk.via.sdj3_kursusopgave_part2.FarmMessageOrBuilder> farmMessageBuilder_;
+    /**
+     * <code>.dk.via.sdj3_kursusopgave_part2.FarmMessage farmMessage = 1;</code>
+     */
+    public boolean hasFarmMessage() {
+      return farmMessageBuilder_ != null || farmMessage_ != null;
+    }
+    /**
+     * <code>.dk.via.sdj3_kursusopgave_part2.FarmMessage farmMessage = 1;</code>
+     */
+    public dk.via.sdj3_kursusopgave_part2.FarmMessage getFarmMessage() {
+      if (farmMessageBuilder_ == null) {
+        return farmMessage_ == null ? dk.via.sdj3_kursusopgave_part2.FarmMessage.getDefaultInstance() : farmMessage_;
+      } else {
+        return farmMessageBuilder_.getMessage();
+      }
+    }
+    /**
+     * <code>.dk.via.sdj3_kursusopgave_part2.FarmMessage farmMessage = 1;</code>
+     */
+    public Builder setFarmMessage(dk.via.sdj3_kursusopgave_part2.FarmMessage value) {
+      if (farmMessageBuilder_ == null) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        farmMessage_ = value;
+        onChanged();
+      } else {
+        farmMessageBuilder_.setMessage(value);
+      }
+
+      return this;
+    }
+    /**
+     * <code>.dk.via.sdj3_kursusopgave_part2.FarmMessage farmMessage = 1;</code>
+     */
+    public Builder setFarmMessage(
+        dk.via.sdj3_kursusopgave_part2.FarmMessage.Builder builderForValue) {
+      if (farmMessageBuilder_ == null) {
+        farmMessage_ = builderForValue.build();
+        onChanged();
+      } else {
+        farmMessageBuilder_.setMessage(builderForValue.build());
+      }
+
+      return this;
+    }
+    /**
+     * <code>.dk.via.sdj3_kursusopgave_part2.FarmMessage farmMessage = 1;</code>
+     */
+    public Builder mergeFarmMessage(dk.via.sdj3_kursusopgave_part2.FarmMessage value) {
+      if (farmMessageBuilder_ == null) {
+        if (farmMessage_ != null) {
+          farmMessage_ =
+            dk.via.sdj3_kursusopgave_part2.FarmMessage.newBuilder(farmMessage_).mergeFrom(value).buildPartial();
+        } else {
+          farmMessage_ = value;
+        }
+        onChanged();
+      } else {
+        farmMessageBuilder_.mergeFrom(value);
+      }
+
+      return this;
+    }
+    /**
+     * <code>.dk.via.sdj3_kursusopgave_part2.FarmMessage farmMessage = 1;</code>
+     */
+    public Builder clearFarmMessage() {
+      if (farmMessageBuilder_ == null) {
+        farmMessage_ = null;
+        onChanged();
+      } else {
+        farmMessage_ = null;
+        farmMessageBuilder_ = null;
+      }
+
+      return this;
+    }
+    /**
+     * <code>.dk.via.sdj3_kursusopgave_part2.FarmMessage farmMessage = 1;</code>
+     */
+    public dk.via.sdj3_kursusopgave_part2.FarmMessage.Builder getFarmMessageBuilder() {
+      
+      onChanged();
+      return getFarmMessageFieldBuilder().getBuilder();
+    }
+    /**
+     * <code>.dk.via.sdj3_kursusopgave_part2.FarmMessage farmMessage = 1;</code>
+     */
+    public dk.via.sdj3_kursusopgave_part2.FarmMessageOrBuilder getFarmMessageOrBuilder() {
+      if (farmMessageBuilder_ != null) {
+        return farmMessageBuilder_.getMessageOrBuilder();
+      } else {
+        return farmMessage_ == null ?
+            dk.via.sdj3_kursusopgave_part2.FarmMessage.getDefaultInstance() : farmMessage_;
+      }
+    }
+    /**
+     * <code>.dk.via.sdj3_kursusopgave_part2.FarmMessage farmMessage = 1;</code>
+     */
+    private com.google.protobuf.SingleFieldBuilderV3<
+        dk.via.sdj3_kursusopgave_part2.FarmMessage, dk.via.sdj3_kursusopgave_part2.FarmMessage.Builder, dk.via.sdj3_kursusopgave_part2.FarmMessageOrBuilder> 
+        getFarmMessageFieldBuilder() {
+      if (farmMessageBuilder_ == null) {
+        farmMessageBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+            dk.via.sdj3_kursusopgave_part2.FarmMessage, dk.via.sdj3_kursusopgave_part2.FarmMessage.Builder, dk.via.sdj3_kursusopgave_part2.FarmMessageOrBuilder>(
+                getFarmMessage(),
+                getParentForChildren(),
+                isClean());
+        farmMessage_ = null;
+      }
+      return farmMessageBuilder_;
     }
     public final Builder setUnknownFields(
         final com.google.protobuf.UnknownFieldSet unknownFields) {

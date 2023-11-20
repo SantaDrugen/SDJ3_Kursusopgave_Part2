@@ -6,4 +6,17 @@ package dk.via.sdj3_kursusopgave_part2;
 public interface CreateFarmResponseOrBuilder extends
     // @@protoc_insertion_point(interface_extends:dk.via.sdj3_kursusopgave_part2.CreateFarmResponse)
     com.google.protobuf.MessageOrBuilder {
+
+  /**
+   * <code>.dk.via.sdj3_kursusopgave_part2.FarmMessage farmMessage = 1;</code>
+   */
+  boolean hasFarmMessage();
+  /**
+   * <code>.dk.via.sdj3_kursusopgave_part2.FarmMessage farmMessage = 1;</code>
+   */
+  dk.via.sdj3_kursusopgave_part2.FarmMessage getFarmMessage();
+  /**
+   * <code>.dk.via.sdj3_kursusopgave_part2.FarmMessage farmMessage = 1;</code>
+   */
+  dk.via.sdj3_kursusopgave_part2.FarmMessageOrBuilder getFarmMessageOrBuilder();
 }

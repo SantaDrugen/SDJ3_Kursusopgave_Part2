@@ -1,9 +1,11 @@
 package dk.via.sdj3_kursusopgave_part2.AnimalStack.AnimalClient.Controllers;
 
-import dk.via.sdj3_kursusopgave_part2.AnimalStack.AnimalServer.IServer;
-import dk.via.sdj3_kursusopgave_part2.AnimalStack.AnimalServer.Server;
+import dk.via.sdj3_kursusopgave_part2.AnimalStack.AnimalClient.AnimalStack_gRPC_ClientInterface;
+import dk.via.sdj3_kursusopgave_part2.AnimalStack.AnimalClient.AnimalWebAPI_ClientImpl;
 import dk.via.sdj3_kursusopgave_part2.Shared.DTOs.AnimalDto;
 import dk.via.sdj3_kursusopgave_part2.Shared.Domain.Animal;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,10 +15,11 @@ import java.util.Collection;
 @RequestMapping("/animal")
 public class AnimalController {
 
-    private IServer server;
+    private AnimalStack_gRPC_ClientInterface server;
 
-    public AnimalController() {
-        this.server = new Server();
+    @Autowired
+    public AnimalController(@Qualifier("AnimalStackServer") AnimalWebAPI_ClientImpl server) {
+        this.server = server;
     }
 
     @GetMapping
@@ -29,12 +32,12 @@ public class AnimalController {
     public ResponseEntity createAnimal(@RequestBody AnimalDto animal)
     {
         server.createAnimal(animal);
-        return ResponseEntity.ok().build();
+        return ResponseEntity.ok().body("Animal created");
     }
 
     @GetMapping
     @RequestMapping( params = "animalId" )
-    public ResponseEntity<Animal> getAnimal(@RequestParam int animalId) {
+    public ResponseEntity<Animal> getAnimal(@RequestParam String animalId) {
         Animal animal = server.getAnimal(animalId);
         if (animal != null) {
             return ResponseEntity.ok(animal);

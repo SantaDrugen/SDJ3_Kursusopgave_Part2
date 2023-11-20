@@ -8,7 +8,43 @@ message CreateFarmRequest {
 }
 
 message CreateFarmResponse {
+    FarmMessage farmMessage = 1;
 }
+
+
+message FarmMessage {
+    string farmName = 1;
+    int32 id = 2;
+}
+
+message GetAllFarmsRequest {
+}
+
+message GetAllFarmsResponse {
+    repeated FarmMessage farms = 1;
+}
+
+
+message GetFarmRequest {
+    int32 id = 1;
+}
+
+
+
+message AnimalMessage {
+    FarmMessage farm = 1;
+    double weight = 2;
+    int32 id = 3;
+    string date = 4;
+}
+
+message GetAllAnimalsRequest {
+}
+
+message GetAllAnimalsResponse {
+    repeated AnimalMessage animals = 1;
+}
+
 
 message CreateAnimalRequest {
     int32 farmId = 1;
@@ -16,10 +52,44 @@ message CreateAnimalRequest {
 }
 
 message CreateAnimalResponse {
+    string message = 1;
+}
+
+
+message GetAnimalRequest {
+    string id = 1;
+}
+
+message GetAnimalResponse {
+    AnimalMessage animal = 1;
+}
+
+
+message GetAllAnimalsFromFarmRequest {
+    int32 farmId = 1;
+}
+
+message GetAllAnimalsFromFarmResponse {
+    repeated AnimalMessage animals = 1;
+}
+
+
+message GetAllAnimalsFromDateRequest {
+    string date = 1;
+}
+
+message GetAllAnimalsFromDateResponse {
+    repeated AnimalMessage animals = 1;
 }
 
 
 service AnimalService {
     rpc createFarm(CreateFarmRequest) returns (CreateFarmResponse);
     rpc CreateAnimal(CreateAnimalRequest) returns (CreateAnimalResponse);
+    rpc GetAllFarms(GetAllFarmsRequest) returns (GetAllFarmsResponse);
+    rpc GetAllAnimals(GetAllAnimalsRequest) returns (GetAllAnimalsResponse);
+    rpc GetFarm(GetFarmRequest) returns (FarmMessage);
+    rpc GetAnimal(GetAnimalRequest) returns (GetAnimalResponse);
+    rpc GetAllAnimalsFromFarm(GetAllAnimalsFromFarmRequest) returns (GetAllAnimalsFromFarmResponse);
+    rpc GetAllAnimalsFromDate(GetAllAnimalsFromDateRequest) returns (GetAllAnimalsFromDateResponse);
 }

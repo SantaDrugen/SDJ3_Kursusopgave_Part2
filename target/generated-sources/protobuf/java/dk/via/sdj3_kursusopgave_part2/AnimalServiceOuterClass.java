@@ -25,6 +25,41 @@ public final class AnimalServiceOuterClass {
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_dk_via_sdj3_kursusopgave_part2_CreateFarmResponse_fieldAccessorTable;
   static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_dk_via_sdj3_kursusopgave_part2_FarmMessage_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_dk_via_sdj3_kursusopgave_part2_FarmMessage_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_dk_via_sdj3_kursusopgave_part2_GetAllFarmsRequest_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_dk_via_sdj3_kursusopgave_part2_GetAllFarmsRequest_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_dk_via_sdj3_kursusopgave_part2_GetAllFarmsResponse_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_dk_via_sdj3_kursusopgave_part2_GetAllFarmsResponse_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_dk_via_sdj3_kursusopgave_part2_GetFarmRequest_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_dk_via_sdj3_kursusopgave_part2_GetFarmRequest_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_dk_via_sdj3_kursusopgave_part2_AnimalMessage_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_dk_via_sdj3_kursusopgave_part2_AnimalMessage_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_dk_via_sdj3_kursusopgave_part2_GetAllAnimalsRequest_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_dk_via_sdj3_kursusopgave_part2_GetAllAnimalsRequest_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_dk_via_sdj3_kursusopgave_part2_GetAllAnimalsResponse_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_dk_via_sdj3_kursusopgave_part2_GetAllAnimalsResponse_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
     internal_static_dk_via_sdj3_kursusopgave_part2_CreateAnimalRequest_descriptor;
   static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
@@ -34,6 +69,36 @@ public final class AnimalServiceOuterClass {
   static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_dk_via_sdj3_kursusopgave_part2_CreateAnimalResponse_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_dk_via_sdj3_kursusopgave_part2_GetAnimalRequest_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_dk_via_sdj3_kursusopgave_part2_GetAnimalRequest_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_dk_via_sdj3_kursusopgave_part2_GetAnimalResponse_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_dk_via_sdj3_kursusopgave_part2_GetAnimalResponse_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_dk_via_sdj3_kursusopgave_part2_GetAllAnimalsFromFarmRequest_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_dk_via_sdj3_kursusopgave_part2_GetAllAnimalsFromFarmRequest_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_dk_via_sdj3_kursusopgave_part2_GetAllAnimalsFromFarmResponse_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_dk_via_sdj3_kursusopgave_part2_GetAllAnimalsFromFarmResponse_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_dk_via_sdj3_kursusopgave_part2_GetAllAnimalsFromDateRequest_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_dk_via_sdj3_kursusopgave_part2_GetAllAnimalsFromDateRequest_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_dk_via_sdj3_kursusopgave_part2_GetAllAnimalsFromDateResponse_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_dk_via_sdj3_kursusopgave_part2_GetAllAnimalsFromDateResponse_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -45,16 +110,58 @@ public final class AnimalServiceOuterClass {
     java.lang.String[] descriptorData = {
       "\n\023AnimalService.proto\022\036dk.via.sdj3_kursu" +
       "sopgave_part2\"%\n\021CreateFarmRequest\022\020\n\010fa" +
-      "rmName\030\001 \001(\t\"\024\n\022CreateFarmResponse\"5\n\023Cr" +
-      "eateAnimalRequest\022\016\n\006farmId\030\001 \001(\005\022\016\n\006wei" +
-      "ght\030\002 \001(\001\"\026\n\024CreateAnimalResponse2\377\001\n\rAn" +
-      "imalService\022s\n\ncreateFarm\0221.dk.via.sdj3_" +
-      "kursusopgave_part2.CreateFarmRequest\0322.d" +
-      "k.via.sdj3_kursusopgave_part2.CreateFarm" +
-      "Response\022y\n\014CreateAnimal\0223.dk.via.sdj3_k" +
-      "ursusopgave_part2.CreateAnimalRequest\0324.",
-      "dk.via.sdj3_kursusopgave_part2.CreateAni" +
-      "malResponseB\002P\001b\006proto3"
+      "rmName\030\001 \001(\t\"V\n\022CreateFarmResponse\022@\n\013fa" +
+      "rmMessage\030\001 \001(\0132+.dk.via.sdj3_kursusopga" +
+      "ve_part2.FarmMessage\"+\n\013FarmMessage\022\020\n\010f" +
+      "armName\030\001 \001(\t\022\n\n\002id\030\002 \001(\005\"\024\n\022GetAllFarms" +
+      "Request\"Q\n\023GetAllFarmsResponse\022:\n\005farms\030" +
+      "\001 \003(\0132+.dk.via.sdj3_kursusopgave_part2.F" +
+      "armMessage\"\034\n\016GetFarmRequest\022\n\n\002id\030\001 \001(\005" +
+      "\"t\n\rAnimalMessage\0229\n\004farm\030\001 \001(\0132+.dk.via",
+      ".sdj3_kursusopgave_part2.FarmMessage\022\016\n\006" +
+      "weight\030\002 \001(\001\022\n\n\002id\030\003 \001(\005\022\014\n\004date\030\004 \001(\t\"\026" +
+      "\n\024GetAllAnimalsRequest\"W\n\025GetAllAnimalsR" +
+      "esponse\022>\n\007animals\030\001 \003(\0132-.dk.via.sdj3_k" +
+      "ursusopgave_part2.AnimalMessage\"5\n\023Creat" +
+      "eAnimalRequest\022\016\n\006farmId\030\001 \001(\005\022\016\n\006weight" +
+      "\030\002 \001(\001\"\'\n\024CreateAnimalResponse\022\017\n\007messag" +
+      "e\030\001 \001(\t\"\036\n\020GetAnimalRequest\022\n\n\002id\030\001 \001(\t\"" +
+      "R\n\021GetAnimalResponse\022=\n\006animal\030\001 \001(\0132-.d" +
+      "k.via.sdj3_kursusopgave_part2.AnimalMess",
+      "age\".\n\034GetAllAnimalsFromFarmRequest\022\016\n\006f" +
+      "armId\030\001 \001(\005\"_\n\035GetAllAnimalsFromFarmResp" +
+      "onse\022>\n\007animals\030\001 \003(\0132-.dk.via.sdj3_kurs" +
+      "usopgave_part2.AnimalMessage\",\n\034GetAllAn" +
+      "imalsFromDateRequest\022\014\n\004date\030\001 \001(\t\"_\n\035Ge" +
+      "tAllAnimalsFromDateResponse\022>\n\007animals\030\001" +
+      " \003(\0132-.dk.via.sdj3_kursusopgave_part2.An" +
+      "imalMessage2\375\007\n\rAnimalService\022s\n\ncreateF" +
+      "arm\0221.dk.via.sdj3_kursusopgave_part2.Cre" +
+      "ateFarmRequest\0322.dk.via.sdj3_kursusopgav",
+      "e_part2.CreateFarmResponse\022y\n\014CreateAnim" +
+      "al\0223.dk.via.sdj3_kursusopgave_part2.Crea" +
+      "teAnimalRequest\0324.dk.via.sdj3_kursusopga" +
+      "ve_part2.CreateAnimalResponse\022v\n\013GetAllF" +
+      "arms\0222.dk.via.sdj3_kursusopgave_part2.Ge" +
+      "tAllFarmsRequest\0323.dk.via.sdj3_kursusopg" +
+      "ave_part2.GetAllFarmsResponse\022|\n\rGetAllA" +
+      "nimals\0224.dk.via.sdj3_kursusopgave_part2." +
+      "GetAllAnimalsRequest\0325.dk.via.sdj3_kursu" +
+      "sopgave_part2.GetAllAnimalsResponse\022f\n\007G",
+      "etFarm\022..dk.via.sdj3_kursusopgave_part2." +
+      "GetFarmRequest\032+.dk.via.sdj3_kursusopgav" +
+      "e_part2.FarmMessage\022p\n\tGetAnimal\0220.dk.vi" +
+      "a.sdj3_kursusopgave_part2.GetAnimalReque" +
+      "st\0321.dk.via.sdj3_kursusopgave_part2.GetA" +
+      "nimalResponse\022\224\001\n\025GetAllAnimalsFromFarm\022" +
+      "<.dk.via.sdj3_kursusopgave_part2.GetAllA" +
+      "nimalsFromFarmRequest\032=.dk.via.sdj3_kurs" +
+      "usopgave_part2.GetAllAnimalsFromFarmResp" +
+      "onse\022\224\001\n\025GetAllAnimalsFromDate\022<.dk.via.",
+      "sdj3_kursusopgave_part2.GetAllAnimalsFro" +
+      "mDateRequest\032=.dk.via.sdj3_kursusopgave_" +
+      "part2.GetAllAnimalsFromDateResponseB\002P\001b" +
+      "\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -79,19 +186,97 @@ public final class AnimalServiceOuterClass {
     internal_static_dk_via_sdj3_kursusopgave_part2_CreateFarmResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_dk_via_sdj3_kursusopgave_part2_CreateFarmResponse_descriptor,
-        new java.lang.String[] { });
-    internal_static_dk_via_sdj3_kursusopgave_part2_CreateAnimalRequest_descriptor =
+        new java.lang.String[] { "FarmMessage", });
+    internal_static_dk_via_sdj3_kursusopgave_part2_FarmMessage_descriptor =
       getDescriptor().getMessageTypes().get(2);
+    internal_static_dk_via_sdj3_kursusopgave_part2_FarmMessage_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_dk_via_sdj3_kursusopgave_part2_FarmMessage_descriptor,
+        new java.lang.String[] { "FarmName", "Id", });
+    internal_static_dk_via_sdj3_kursusopgave_part2_GetAllFarmsRequest_descriptor =
+      getDescriptor().getMessageTypes().get(3);
+    internal_static_dk_via_sdj3_kursusopgave_part2_GetAllFarmsRequest_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_dk_via_sdj3_kursusopgave_part2_GetAllFarmsRequest_descriptor,
+        new java.lang.String[] { });
+    internal_static_dk_via_sdj3_kursusopgave_part2_GetAllFarmsResponse_descriptor =
+      getDescriptor().getMessageTypes().get(4);
+    internal_static_dk_via_sdj3_kursusopgave_part2_GetAllFarmsResponse_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_dk_via_sdj3_kursusopgave_part2_GetAllFarmsResponse_descriptor,
+        new java.lang.String[] { "Farms", });
+    internal_static_dk_via_sdj3_kursusopgave_part2_GetFarmRequest_descriptor =
+      getDescriptor().getMessageTypes().get(5);
+    internal_static_dk_via_sdj3_kursusopgave_part2_GetFarmRequest_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_dk_via_sdj3_kursusopgave_part2_GetFarmRequest_descriptor,
+        new java.lang.String[] { "Id", });
+    internal_static_dk_via_sdj3_kursusopgave_part2_AnimalMessage_descriptor =
+      getDescriptor().getMessageTypes().get(6);
+    internal_static_dk_via_sdj3_kursusopgave_part2_AnimalMessage_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_dk_via_sdj3_kursusopgave_part2_AnimalMessage_descriptor,
+        new java.lang.String[] { "Farm", "Weight", "Id", "Date", });
+    internal_static_dk_via_sdj3_kursusopgave_part2_GetAllAnimalsRequest_descriptor =
+      getDescriptor().getMessageTypes().get(7);
+    internal_static_dk_via_sdj3_kursusopgave_part2_GetAllAnimalsRequest_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_dk_via_sdj3_kursusopgave_part2_GetAllAnimalsRequest_descriptor,
+        new java.lang.String[] { });
+    internal_static_dk_via_sdj3_kursusopgave_part2_GetAllAnimalsResponse_descriptor =
+      getDescriptor().getMessageTypes().get(8);
+    internal_static_dk_via_sdj3_kursusopgave_part2_GetAllAnimalsResponse_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_dk_via_sdj3_kursusopgave_part2_GetAllAnimalsResponse_descriptor,
+        new java.lang.String[] { "Animals", });
+    internal_static_dk_via_sdj3_kursusopgave_part2_CreateAnimalRequest_descriptor =
+      getDescriptor().getMessageTypes().get(9);
     internal_static_dk_via_sdj3_kursusopgave_part2_CreateAnimalRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_dk_via_sdj3_kursusopgave_part2_CreateAnimalRequest_descriptor,
         new java.lang.String[] { "FarmId", "Weight", });
     internal_static_dk_via_sdj3_kursusopgave_part2_CreateAnimalResponse_descriptor =
-      getDescriptor().getMessageTypes().get(3);
+      getDescriptor().getMessageTypes().get(10);
     internal_static_dk_via_sdj3_kursusopgave_part2_CreateAnimalResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_dk_via_sdj3_kursusopgave_part2_CreateAnimalResponse_descriptor,
-        new java.lang.String[] { });
+        new java.lang.String[] { "Message", });
+    internal_static_dk_via_sdj3_kursusopgave_part2_GetAnimalRequest_descriptor =
+      getDescriptor().getMessageTypes().get(11);
+    internal_static_dk_via_sdj3_kursusopgave_part2_GetAnimalRequest_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_dk_via_sdj3_kursusopgave_part2_GetAnimalRequest_descriptor,
+        new java.lang.String[] { "Id", });
+    internal_static_dk_via_sdj3_kursusopgave_part2_GetAnimalResponse_descriptor =
+      getDescriptor().getMessageTypes().get(12);
+    internal_static_dk_via_sdj3_kursusopgave_part2_GetAnimalResponse_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_dk_via_sdj3_kursusopgave_part2_GetAnimalResponse_descriptor,
+        new java.lang.String[] { "Animal", });
+    internal_static_dk_via_sdj3_kursusopgave_part2_GetAllAnimalsFromFarmRequest_descriptor =
+      getDescriptor().getMessageTypes().get(13);
+    internal_static_dk_via_sdj3_kursusopgave_part2_GetAllAnimalsFromFarmRequest_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_dk_via_sdj3_kursusopgave_part2_GetAllAnimalsFromFarmRequest_descriptor,
+        new java.lang.String[] { "FarmId", });
+    internal_static_dk_via_sdj3_kursusopgave_part2_GetAllAnimalsFromFarmResponse_descriptor =
+      getDescriptor().getMessageTypes().get(14);
+    internal_static_dk_via_sdj3_kursusopgave_part2_GetAllAnimalsFromFarmResponse_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_dk_via_sdj3_kursusopgave_part2_GetAllAnimalsFromFarmResponse_descriptor,
+        new java.lang.String[] { "Animals", });
+    internal_static_dk_via_sdj3_kursusopgave_part2_GetAllAnimalsFromDateRequest_descriptor =
+      getDescriptor().getMessageTypes().get(15);
+    internal_static_dk_via_sdj3_kursusopgave_part2_GetAllAnimalsFromDateRequest_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_dk_via_sdj3_kursusopgave_part2_GetAllAnimalsFromDateRequest_descriptor,
+        new java.lang.String[] { "Date", });
+    internal_static_dk_via_sdj3_kursusopgave_part2_GetAllAnimalsFromDateResponse_descriptor =
+      getDescriptor().getMessageTypes().get(16);
+    internal_static_dk_via_sdj3_kursusopgave_part2_GetAllAnimalsFromDateResponse_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_dk_via_sdj3_kursusopgave_part2_GetAllAnimalsFromDateResponse_descriptor,
+        new java.lang.String[] { "Animals", });
   }
 
   // @@protoc_insertion_point(outer_class_scope)

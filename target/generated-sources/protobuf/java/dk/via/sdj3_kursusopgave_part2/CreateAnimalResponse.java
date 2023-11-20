@@ -15,6 +15,7 @@ public  final class CreateAnimalResponse extends
     super(builder);
   }
   private CreateAnimalResponse() {
+    message_ = "";
   }
 
   @java.lang.Override
@@ -27,6 +28,7 @@ public  final class CreateAnimalResponse extends
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     this();
+    int mutable_bitField0_ = 0;
     try {
       boolean done = false;
       while (!done) {
@@ -39,6 +41,12 @@ public  final class CreateAnimalResponse extends
             if (!input.skipField(tag)) {
               done = true;
             }
+            break;
+          }
+          case 10: {
+            java.lang.String s = input.readStringRequireUtf8();
+
+            message_ = s;
             break;
           }
         }
@@ -64,6 +72,40 @@ public  final class CreateAnimalResponse extends
             dk.via.sdj3_kursusopgave_part2.CreateAnimalResponse.class, dk.via.sdj3_kursusopgave_part2.CreateAnimalResponse.Builder.class);
   }
 
+  public static final int MESSAGE_FIELD_NUMBER = 1;
+  private volatile java.lang.Object message_;
+  /**
+   * <code>string message = 1;</code>
+   */
+  public java.lang.String getMessage() {
+    java.lang.Object ref = message_;
+    if (ref instanceof java.lang.String) {
+      return (java.lang.String) ref;
+    } else {
+      com.google.protobuf.ByteString bs = 
+          (com.google.protobuf.ByteString) ref;
+      java.lang.String s = bs.toStringUtf8();
+      message_ = s;
+      return s;
+    }
+  }
+  /**
+   * <code>string message = 1;</code>
+   */
+  public com.google.protobuf.ByteString
+      getMessageBytes() {
+    java.lang.Object ref = message_;
+    if (ref instanceof java.lang.String) {
+      com.google.protobuf.ByteString b = 
+          com.google.protobuf.ByteString.copyFromUtf8(
+              (java.lang.String) ref);
+      message_ = b;
+      return b;
+    } else {
+      return (com.google.protobuf.ByteString) ref;
+    }
+  }
+
   private byte memoizedIsInitialized = -1;
   public final boolean isInitialized() {
     byte isInitialized = memoizedIsInitialized;
@@ -76,6 +118,9 @@ public  final class CreateAnimalResponse extends
 
   public void writeTo(com.google.protobuf.CodedOutputStream output)
                       throws java.io.IOException {
+    if (!getMessageBytes().isEmpty()) {
+      com.google.protobuf.GeneratedMessageV3.writeString(output, 1, message_);
+    }
   }
 
   public int getSerializedSize() {
@@ -83,6 +128,9 @@ public  final class CreateAnimalResponse extends
     if (size != -1) return size;
 
     size = 0;
+    if (!getMessageBytes().isEmpty()) {
+      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, message_);
+    }
     memoizedSize = size;
     return size;
   }
@@ -99,6 +147,8 @@ public  final class CreateAnimalResponse extends
     dk.via.sdj3_kursusopgave_part2.CreateAnimalResponse other = (dk.via.sdj3_kursusopgave_part2.CreateAnimalResponse) obj;
 
     boolean result = true;
+    result = result && getMessage()
+        .equals(other.getMessage());
     return result;
   }
 
@@ -109,6 +159,8 @@ public  final class CreateAnimalResponse extends
     }
     int hash = 41;
     hash = (19 * hash) + getDescriptor().hashCode();
+    hash = (37 * hash) + MESSAGE_FIELD_NUMBER;
+    hash = (53 * hash) + getMessage().hashCode();
     hash = (29 * hash) + unknownFields.hashCode();
     memoizedHashCode = hash;
     return hash;
@@ -238,6 +290,8 @@ public  final class CreateAnimalResponse extends
     }
     public Builder clear() {
       super.clear();
+      message_ = "";
+
       return this;
     }
 
@@ -260,6 +314,7 @@ public  final class CreateAnimalResponse extends
 
     public dk.via.sdj3_kursusopgave_part2.CreateAnimalResponse buildPartial() {
       dk.via.sdj3_kursusopgave_part2.CreateAnimalResponse result = new dk.via.sdj3_kursusopgave_part2.CreateAnimalResponse(this);
+      result.message_ = message_;
       onBuilt();
       return result;
     }
@@ -301,6 +356,10 @@ public  final class CreateAnimalResponse extends
 
     public Builder mergeFrom(dk.via.sdj3_kursusopgave_part2.CreateAnimalResponse other) {
       if (other == dk.via.sdj3_kursusopgave_part2.CreateAnimalResponse.getDefaultInstance()) return this;
+      if (!other.getMessage().isEmpty()) {
+        message_ = other.message_;
+        onChanged();
+      }
       onChanged();
       return this;
     }
@@ -324,6 +383,75 @@ public  final class CreateAnimalResponse extends
           mergeFrom(parsedMessage);
         }
       }
+      return this;
+    }
+
+    private java.lang.Object message_ = "";
+    /**
+     * <code>string message = 1;</code>
+     */
+    public java.lang.String getMessage() {
+      java.lang.Object ref = message_;
+      if (!(ref instanceof java.lang.String)) {
+        com.google.protobuf.ByteString bs =
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        message_ = s;
+        return s;
+      } else {
+        return (java.lang.String) ref;
+      }
+    }
+    /**
+     * <code>string message = 1;</code>
+     */
+    public com.google.protobuf.ByteString
+        getMessageBytes() {
+      java.lang.Object ref = message_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        message_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+    /**
+     * <code>string message = 1;</code>
+     */
+    public Builder setMessage(
+        java.lang.String value) {
+      if (value == null) {
+    throw new NullPointerException();
+  }
+  
+      message_ = value;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>string message = 1;</code>
+     */
+    public Builder clearMessage() {
+      
+      message_ = getDefaultInstance().getMessage();
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>string message = 1;</code>
+     */
+    public Builder setMessageBytes(
+        com.google.protobuf.ByteString value) {
+      if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+      
+      message_ = value;
+      onChanged();
       return this;
     }
     public final Builder setUnknownFields(

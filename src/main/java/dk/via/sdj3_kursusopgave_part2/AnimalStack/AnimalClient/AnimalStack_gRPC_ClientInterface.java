@@ -1,15 +1,17 @@
-package dk.via.sdj3_kursusopgave_part2.AnimalStack.AnimalServer;
+package dk.via.sdj3_kursusopgave_part2.AnimalStack.AnimalClient;
 
 import dk.via.sdj3_kursusopgave_part2.Shared.DTOs.AnimalDto;
 import dk.via.sdj3_kursusopgave_part2.Shared.DTOs.FarmDto;
 import dk.via.sdj3_kursusopgave_part2.Shared.Domain.Animal;
 import dk.via.sdj3_kursusopgave_part2.Shared.Domain.Farm;
+import org.springframework.stereotype.Component;
 
 import java.util.Collection;
 
-public interface IServer {
+@Component("AnimalStackServerInterface")
+public interface AnimalStack_gRPC_ClientInterface {
 
-    public void createFarm(FarmDto farm);
+    public Farm createFarm(FarmDto farm);
 
     public Collection<Farm> getAllfarms();
 
@@ -17,9 +19,9 @@ public interface IServer {
 
     public Collection<Animal> getAllAnimals();
 
-    public void createAnimal(AnimalDto animal);
+    public String createAnimal(AnimalDto animal);
 
-    public Animal getAnimal(int animalId);
+    public Animal getAnimal(String animalId);
 
     public Collection<Animal> getAllAnimalsByFarmId(int farmId);
 

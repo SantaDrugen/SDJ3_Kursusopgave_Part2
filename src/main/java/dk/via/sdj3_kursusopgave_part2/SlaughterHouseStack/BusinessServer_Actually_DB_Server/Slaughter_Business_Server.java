@@ -1,4 +1,4 @@
-package dk.via.sdj3_kursusopgave_part2.SlaughterHouseStack.BusinessServer;
+package dk.via.sdj3_kursusopgave_part2.SlaughterHouseStack.BusinessServer_Actually_DB_Server;
 
 import io.grpc.Server;
 

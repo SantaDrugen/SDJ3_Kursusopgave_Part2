@@ -123,6 +123,11 @@ public class DatabaseServer extends AnimalServiceGrpc.AnimalServiceImplBase impl
         return animalsToGet;
     }
 
+    @Override
+    public Collection<Farm> getAllFarms() {
+        return farms;
+    }
+
     private Farm getFarmById(int id)
     {
         Farm farmToGet = null;

@@ -1,13 +1,11 @@
-package dk.via.sdj3_kursusopgave_part2.SlaughterHouseStack.BusinessServer;
+package dk.via.sdj3_kursusopgave_part2.SlaughterHouseStack.BusinessServer_Actually_DB_Server;
 import dk.via.sdj3_kursusopgave_part2.AnimalCut;
 import dk.via.sdj3_kursusopgave_part2.GetAllAnimalCutsRequest;
 import dk.via.sdj3_kursusopgave_part2.GetAllAnimalCutsResponse;
-import dk.via.sdj3_kursusopgave_part2.SlaughterHouseStack.IServer;
 import dk.via.sdj3_kursusopgave_part2.SlaughterServiceGrpc;
 import io.grpc.stub.StreamObserver;
 
 import java.util.ArrayList;
-import java.util.Collection;
 
 public class Server_GRPC_Client extends SlaughterServiceGrpc.SlaughterServiceImplBase {
 

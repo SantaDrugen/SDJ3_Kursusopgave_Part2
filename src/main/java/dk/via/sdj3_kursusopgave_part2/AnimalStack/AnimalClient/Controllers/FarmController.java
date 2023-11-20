@@ -1,9 +1,11 @@
 package dk.via.sdj3_kursusopgave_part2.AnimalStack.AnimalClient.Controllers;
 
-import dk.via.sdj3_kursusopgave_part2.AnimalStack.AnimalServer.IServer;
-import dk.via.sdj3_kursusopgave_part2.AnimalStack.AnimalServer.Server;
+import dk.via.sdj3_kursusopgave_part2.AnimalStack.AnimalClient.AnimalWebAPI_ClientImpl;
+import dk.via.sdj3_kursusopgave_part2.AnimalStack.AnimalClient.AnimalStack_gRPC_ClientInterface;
 import dk.via.sdj3_kursusopgave_part2.Shared.DTOs.FarmDto;
 import dk.via.sdj3_kursusopgave_part2.Shared.Domain.Farm;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,10 +14,11 @@ import java.util.Collection;
 @RestController
 @RequestMapping("/farm")
 public class FarmController {
-    private IServer server;
+    private AnimalWebAPI_ClientImpl server;
 
-    public FarmController() {
-        server = new Server();
+    @Autowired
+    public FarmController(@Qualifier("AnimalStackServer") AnimalWebAPI_ClientImpl server) {
+        this.server = server;
     }
 
 
