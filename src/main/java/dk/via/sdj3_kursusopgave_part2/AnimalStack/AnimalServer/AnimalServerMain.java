@@ -9,7 +9,7 @@ import io.grpc.ManagedChannelBuilder;
 public class AnimalServerMain {
     public static void main(String[] args) {
 
-        Server server = new Server();
+        //Server server = new Server();
 
         ManagedChannel managedChannel = ManagedChannelBuilder
                 .forAddress("localhost", 1234)
@@ -19,13 +19,13 @@ public class AnimalServerMain {
         AnimalServiceGrpc.AnimalServiceBlockingStub stub =
                 AnimalServiceGrpc.newBlockingStub(managedChannel);
 
-        CreateFarmRequest request = CreateFarmRequest.newBuilder()
-                .setFarmName("Farm 1")
-                .build();
-
-        CreateFarmResponse farmResponse = stub.createFarm(request);
-
-        System.out.println(farmResponse);
+//        CreateFarmRequest request = CreateFarmRequest.newBuilder()
+//                .setFarmName("Farm 1")
+//                .build();
+//
+//        CreateFarmResponse farmResponse = stub.createFarm(request);
+//
+//        System.out.println(farmResponse);
 
         managedChannel.shutdown();
     }

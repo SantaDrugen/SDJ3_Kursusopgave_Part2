@@ -1,0 +1,19 @@
+syntax = "proto3";
+option java_multiple_files = true;
+
+package dk.via.sdj3_kursusopgave_part2;
+
+message AnimalCut {
+  string cutId = 1;
+}
+
+message GetAllAnimalCutsResponse {
+  repeated AnimalCut animalCuts = 1;
+}
+
+ message GetAllAnimalCutsRequest {
+}
+
+service SlaughterService {
+  rpc GetAllAnimalCuts(GetAllAnimalCutsRequest) returns (GetAllAnimalCutsResponse);
+}

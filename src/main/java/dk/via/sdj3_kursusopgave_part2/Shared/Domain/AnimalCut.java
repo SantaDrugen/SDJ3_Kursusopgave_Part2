@@ -7,4 +7,12 @@ public class AnimalCut {
     public AnimalCut(String cutId) {
         this.cutId = cutId;
     }
+
+    public String getCutId() {
+        return cutId;
+    }
+
+    public void setCutId(String cutId) {
+        this.cutId = cutId;
+    }
 }
