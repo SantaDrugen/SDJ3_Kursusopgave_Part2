@@ -1,7 +1,7 @@
 package dk.via.sdj3_kursusopgave_part2.AnimalStack.AnimalBusinessServer.Controllers;
 
-import dk.via.sdj3_kursusopgave_part2.AnimalStack.AnimalBusinessServer.AnimalStack_gRPC_ClientInterface;
-import dk.via.sdj3_kursusopgave_part2.AnimalStack.AnimalBusinessServer.AnimalWebAPI_ClientImpl;
+import dk.via.sdj3_kursusopgave_part2.AnimalStack.AnimalBusinessServer.AnimalBusinessServer;
+import dk.via.sdj3_kursusopgave_part2.AnimalStack.AnimalBusinessServer.AnimalBusinessServerImpl;
 import dk.via.sdj3_kursusopgave_part2.Shared.DTOs.AnimalDto;
 import dk.via.sdj3_kursusopgave_part2.Shared.Domain.Animal;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,10 +15,10 @@ import java.util.Collection;
 @RequestMapping("/animal")
 public class AnimalController {
 
-    private AnimalStack_gRPC_ClientInterface server;
+    private AnimalBusinessServer server;
 
     @Autowired
-    public AnimalController(@Qualifier("AnimalStackServer") AnimalWebAPI_ClientImpl server) {
+    public AnimalController(@Qualifier("AnimalStackServer") AnimalBusinessServerImpl server) {
         this.server = server;
     }
 
@@ -49,7 +49,7 @@ public class AnimalController {
     @GetMapping
     @RequestMapping( params = "farmId" )
     public ResponseEntity<Collection<Animal>> getAnimalsFromFarm(@RequestParam int farmId) {
-        Collection<Animal> animals = server.getAllAnimalsByFarmId(farmId);
+        Collection<Animal> animals = server.GetAllAnimalsFromFarm(farmId);
         if (animals != null) {
             return ResponseEntity.ok(animals);
         } else {
@@ -59,8 +59,8 @@ public class AnimalController {
 
     @GetMapping
     @RequestMapping( params = "dateOfArrival" )
-    public ResponseEntity<Collection<Animal>> getAnimalsFromFarm(@RequestParam String dateOfArrival) {
-        Collection<Animal> animals = server.getAllAnimalsByDateOfArrival(dateOfArrival);
+    public ResponseEntity<Collection<Animal>> GetAllAnimalsFromDate(@RequestParam String dateOfArrival) {
+        Collection<Animal> animals = server.GetAllAnimalsFromDate(dateOfArrival);
         if (animals != null) {
             return ResponseEntity.ok(animals);
         } else {

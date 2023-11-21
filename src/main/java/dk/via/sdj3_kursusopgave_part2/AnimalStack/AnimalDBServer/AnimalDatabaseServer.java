@@ -156,18 +156,100 @@ public class AnimalDatabaseServer extends AnimalServiceGrpc.AnimalServiceImplBas
     }
 
 
-    public Animal getAnimal(int animalId) {
-        return null;
+    public void getAnimal(GetAnimalRequest request,
+                          StreamObserver<GetAnimalResponse> responseObserver) {
+        for (Animal animal : animals)
+        {
+            if (animal.getAnimalId().equals(request.getId()))
+            {
+                AnimalMessage animalMessage =
+                        AnimalMessage
+                                .newBuilder()
+                                .setFarm(FarmMessage
+                                    .newBuilder()
+                                    .setFarmName(animal.getFarm().getFarmName())
+                                    .setId(animal.getFarm().getFarmId())
+                                    .build()
+                                    )
+                                .setId(animal.getAnimalId())
+                                .setDate(animal.getDate())
+                                .setWeight(animal.getWeight())
+                                .build();
+
+                GetAnimalResponse response = GetAnimalResponse
+                        .newBuilder()
+                        .setAnimal(animalMessage)
+                        .build();
+
+                responseObserver.onNext(response);
+                responseObserver.onCompleted();
+            }
+        }
     }
 
 
-    public Collection<Animal> getAllAnimalsByFarmId(int farmId) {
-        return null;
+    public void getAllAnimalsFromFarm(GetAllAnimalsFromFarmRequest request,
+                                                    StreamObserver<GetAllAnimalsFromFarmResponse> responseObserver) {
+
+        ArrayList<AnimalMessage> animalMessages = new ArrayList<>();
+
+        for (Animal animal : animals)
+        {
+            if (animal.getFarm().getFarmId() == request.getFarmId())
+            {
+                animalMessages.add(
+                        AnimalMessage
+                        .newBuilder()
+                        .setWeight(animal.getWeight())
+                        .setId(animal.getAnimalId())
+                        .setDate(animal.getDate()).setFarm(
+                                FarmMessage
+                                        .newBuilder()
+                                        .setFarmName(animal.getFarm().getFarmName())
+                                        .setId(animal.getFarm().getFarmId()))
+                        .build()
+                );
+            }
+        }
+
+        responseObserver.onNext(GetAllAnimalsFromFarmResponse
+                .newBuilder()
+                .addAllAnimals(animalMessages)
+                .build());
+
+        responseObserver.onCompleted();
     }
 
 
-    public Collection<Animal> getAllAnimalsByDateOfArrival(String dateOfArrival) {
-        return null;
+    public void getAllAnimalsFromDate(GetAllAnimalsFromDateRequest request,
+                                                           StreamObserver<GetAllAnimalsFromDateResponse> responseObserver) {
+        ArrayList<AnimalMessage> animalMessages = new ArrayList<>();
+
+        for (Animal animal : animals)
+        {
+            if (animal.getDate().equals(request.getDate()))
+            {
+                animalMessages.add(
+                        AnimalMessage
+                                .newBuilder()
+                                .setWeight(animal.getWeight())
+                                .setId(animal.getAnimalId())
+                                .setDate(animal.getDate()).setFarm(
+                                        FarmMessage
+                                                .newBuilder()
+                                                .setFarmName(animal.getFarm().getFarmName())
+                                                .setId(animal.getFarm().getFarmId()))
+                                .build()
+                );
+            }
+        }
+
+        responseObserver.onNext(GetAllAnimalsFromDateResponse
+                .newBuilder()
+                .addAllAnimals(animalMessages)
+                .build());
+
+        responseObserver.onCompleted();
     }
 
 

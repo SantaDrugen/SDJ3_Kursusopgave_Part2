@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 import java.util.Collection;
 
 @Component("AnimalStackServerInterface")
-public interface AnimalStack_gRPC_ClientInterface {
+public interface AnimalBusinessServer {
 
     public Farm createFarm(FarmDto farm);
 
@@ -23,7 +23,7 @@ public interface AnimalStack_gRPC_ClientInterface {
 
     public Animal getAnimal(String animalId);
 
-    public Collection<Animal> getAllAnimalsByFarmId(int farmId);
+    public Collection<Animal> GetAllAnimalsFromFarm(int farmId);
 
-    public Collection<Animal> getAllAnimalsByDateOfArrival(String dateOfArrival);
+    public Collection<Animal> GetAllAnimalsFromDate(String dateOfArrival);
 }

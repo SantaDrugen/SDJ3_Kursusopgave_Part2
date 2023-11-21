@@ -16,7 +16,7 @@ import java.util.Collection;
 
 @Component("AnimalStackServer")
 @Scope("singleton")
-public class AnimalWebAPI_ClientImpl implements AnimalStack_gRPC_ClientInterface {
+public class AnimalBusinessServerImpl implements AnimalBusinessServer {
     @Override
     public Farm createFarm(FarmDto farm) {
         ManagedChannel channel = getChannel();
@@ -26,6 +26,7 @@ public class AnimalWebAPI_ClientImpl implements AnimalStack_gRPC_ClientInterface
 
         CreateFarmRequest request = CreateFarmRequest
                 .newBuilder()
+                .setFarmName(farm.getFarmName())
                 .build();
 
         CreateFarmResponse response = stub.createFarm(request);
@@ -66,7 +67,24 @@ public class AnimalWebAPI_ClientImpl implements AnimalStack_gRPC_ClientInterface
 
     @Override
     public Farm getFarm(int farmId) {
-        return null;
+        ManagedChannel channel = getChannel();
+
+        AnimalServiceGrpc.AnimalServiceBlockingStub stub
+                = AnimalServiceGrpc.newBlockingStub(channel);
+
+        GetFarmRequest request = GetFarmRequest
+                .newBuilder()
+                .setId(farmId)
+                .build();
+
+        FarmMessage response = stub.getFarm(request);
+
+        Farm farm = new Farm(response.getFarmName());
+        farm.setFarmId(response.getId());
+
+        channel.shutdown();
+
+        return farm;
     }
 
     @Override
@@ -84,14 +102,14 @@ public class AnimalWebAPI_ClientImpl implements AnimalStack_gRPC_ClientInterface
 
         ArrayList<Animal> animals = new ArrayList<>();
 
-//        for (AnimalMessage animalMessage : response.getAnimalsList()) {
-//            Animal animal = new Animal();
-//            animal.setAnimalId(animalMessage.getId());
-//            animal.setWeight(animalMessage.getWeight());
-//            animal.setDate(animalMessage.getDate());
-//            animal.setFarm(new Farm(animalMessage.getFarm().getFarmName()));
-//            animals.add(animal);
-//        }
+        for (AnimalMessage animalMessage : response.getAnimalsList()) {
+            Animal animal = new Animal();
+            animal.setAnimalId(animalMessage.getId());
+            animal.setWeight(animalMessage.getWeight());
+            animal.setDate(animalMessage.getDate());
+            animal.setFarm(new Farm(animalMessage.getFarm().getFarmName()));
+            animals.add(animal);
+        }
 
         return animals;
     }
@@ -104,7 +122,9 @@ public class AnimalWebAPI_ClientImpl implements AnimalStack_gRPC_ClientInterface
                 = AnimalServiceGrpc.newBlockingStub(channel);
 
         CreateAnimalRequest request = CreateAnimalRequest
-                .newBuilder().setWeight(animal.getWeight()).setFarmId(animal.getFarmId())
+                .newBuilder()
+                .setWeight(animal.getWeight())
+                .setFarmId(animal.getFarmId())
                 .build();
 
         CreateAnimalResponse response = stub.createAnimal(request);
@@ -122,7 +142,8 @@ public class AnimalWebAPI_ClientImpl implements AnimalStack_gRPC_ClientInterface
                 = AnimalServiceGrpc.newBlockingStub(channel);
 
         GetAnimalRequest request = GetAnimalRequest
-                .newBuilder().setId(animalId)
+                .newBuilder()
+                .setId(animalId)
                 .build();
 
         GetAnimalResponse response = stub.getAnimal(request);
@@ -141,7 +162,7 @@ public class AnimalWebAPI_ClientImpl implements AnimalStack_gRPC_ClientInterface
     }
 
     @Override
-    public Collection<Animal> getAllAnimalsByFarmId(int farmId) {
+    public Collection<Animal> GetAllAnimalsFromFarm(int farmId) {
         ManagedChannel channel = getChannel();
 
         AnimalServiceGrpc.AnimalServiceBlockingStub stub
@@ -171,7 +192,7 @@ public class AnimalWebAPI_ClientImpl implements AnimalStack_gRPC_ClientInterface
     }
 
     @Override
-    public Collection<Animal> getAllAnimalsByDateOfArrival(String dateOfArrival) {
+    public Collection<Animal> GetAllAnimalsFromDate(String dateOfArrival) {
         ManagedChannel channel = getChannel();
 
         AnimalServiceGrpc.AnimalServiceBlockingStub stub
@@ -179,6 +200,7 @@ public class AnimalWebAPI_ClientImpl implements AnimalStack_gRPC_ClientInterface
 
         GetAllAnimalsFromDateRequest request = GetAllAnimalsFromDateRequest
                 .newBuilder()
+                .setDate(dateOfArrival)
                 .build();
 
         GetAllAnimalsFromDateResponse response = stub.getAllAnimalsFromDate(request);

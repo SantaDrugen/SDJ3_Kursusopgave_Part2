@@ -1,6 +1,6 @@
 package dk.via.sdj3_kursusopgave_part2.AnimalStack.AnimalBusinessServer.Controllers;
 
-import dk.via.sdj3_kursusopgave_part2.AnimalStack.AnimalBusinessServer.AnimalWebAPI_ClientImpl;
+import dk.via.sdj3_kursusopgave_part2.AnimalStack.AnimalBusinessServer.AnimalBusinessServerImpl;
 import dk.via.sdj3_kursusopgave_part2.Shared.DTOs.FarmDto;
 import dk.via.sdj3_kursusopgave_part2.Shared.Domain.Farm;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,10 +13,10 @@ import java.util.Collection;
 @RestController
 @RequestMapping("/farm")
 public class FarmController {
-    private AnimalWebAPI_ClientImpl server;
+    private AnimalBusinessServerImpl server;
 
     @Autowired
-    public FarmController(@Qualifier("AnimalStackServer") AnimalWebAPI_ClientImpl server) {
+    public FarmController(@Qualifier("AnimalStackServer") AnimalBusinessServerImpl server) {
         this.server = server;
     }
 
@@ -31,6 +31,7 @@ public class FarmController {
     @PostMapping
     public void createFarm(@RequestBody FarmDto farm)
     {
+        System.out.println(farm.getFarmName());
         server.createFarm(farm);
     }
 

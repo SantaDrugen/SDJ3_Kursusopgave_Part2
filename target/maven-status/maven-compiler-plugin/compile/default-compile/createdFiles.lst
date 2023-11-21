@@ -38,6 +38,7 @@ dk\via\sdj3_kursusopgave_part2\FactoryStack\FactoryServer\FactoryServer.class
 dk\via\sdj3_kursusopgave_part2\FactoryService.class
 dk\via\sdj3_kursusopgave_part2\GetAllAnimalCutsRequestOrBuilder.class
 dk\via\sdj3_kursusopgave_part2\AnimalList.class
+dk\via\sdj3_kursusopgave_part2\AnimalStack\AnimalBusinessServer\AnimalBusinessServer.class
 dk\via\sdj3_kursusopgave_part2\GetAnimalResponse$Builder.class
 dk\via\sdj3_kursusopgave_part2\GetInfectedProductAndAnimalResponse.class
 dk\via\sdj3_kursusopgave_part2\AnimalList$Builder.class
@@ -77,6 +78,7 @@ dk\via\sdj3_kursusopgave_part2\AnimalServiceOuterClass$1.class
 dk\via\sdj3_kursusopgave_part2\SlaughterHouseStack\BusinessServer_Actually_DB_Server\Slaughter_Business_Server.class
 dk\via\sdj3_kursusopgave_part2\AnimalCut$1.class
 dk\via\sdj3_kursusopgave_part2\CreateAnimalRequest.class
+dk\via\sdj3_kursusopgave_part2\AnimalStack\AnimalBusinessServer\AnimalBusinessServerImpl.class
 dk\via\sdj3_kursusopgave_part2\CreateFarmResponse.class
 dk\via\sdj3_kursusopgave_part2\AnimalServiceGrpc$MethodHandlers.class
 dk\via\sdj3_kursusopgave_part2\AnimalStack\AnimalBusinessServer\Sdj3KursusopgavePart2Application.class
@@ -120,7 +122,6 @@ dk\via\sdj3_kursusopgave_part2\GetAnimalRequest.class
 dk\via\sdj3_kursusopgave_part2\AnimalStack\AnimalBusinessServer\Controllers\AnimalController.class
 dk\via\sdj3_kursusopgave_part2\GetAnimalResponseOrBuilder.class
 dk\via\sdj3_kursusopgave_part2\GetInfectedProductAndAnimalResponseOrBuilder.class
-dk\via\sdj3_kursusopgave_part2\AnimalStack\AnimalBusinessServer\AnimalStack_gRPC_ClientInterface.class
 dk\via\sdj3_kursusopgave_part2\FactoryStack\FactoryClient\Controllers\ProductController.class
 dk\via\sdj3_kursusopgave_part2\Shared\DTOs\AnimalDto.class
 dk\via\sdj3_kursusopgave_part2\CreateAnimalResponse$1.class
@@ -139,7 +140,6 @@ dk\via\sdj3_kursusopgave_part2\CreateFarmResponse$Builder.class
 dk\via\sdj3_kursusopgave_part2\GetAllFarmsRequest$1.class
 dk\via\sdj3_kursusopgave_part2\AnimalStack\AnimalDBServer\IFileIO.class
 dk\via\sdj3_kursusopgave_part2\GetAnimalRequestOrBuilder.class
-dk\via\sdj3_kursusopgave_part2\AnimalStack\AnimalBusinessServer\AnimalWebAPI_ClientImpl.class
 dk\via\sdj3_kursusopgave_part2\AnimalServiceGrpc$AnimalServiceImplBase.class
 dk\via\sdj3_kursusopgave_part2\InfectedServiceGrpc$InfectedServiceBlockingStub.class
 dk\via\sdj3_kursusopgave_part2\CreateFarmResponse$1.class
