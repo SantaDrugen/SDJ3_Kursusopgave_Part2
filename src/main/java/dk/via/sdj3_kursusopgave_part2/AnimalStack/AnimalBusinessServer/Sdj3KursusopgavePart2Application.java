@@ -1,4 +1,4 @@
-package dk.via.sdj3_kursusopgave_part2.AnimalStack.AnimalClient;
+package dk.via.sdj3_kursusopgave_part2.AnimalStack.AnimalBusinessServer;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

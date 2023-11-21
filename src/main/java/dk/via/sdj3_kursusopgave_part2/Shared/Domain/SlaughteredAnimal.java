@@ -4,17 +4,13 @@ import java.util.ArrayList;
 
 public class SlaughteredAnimal {
 
-    int slaughtedAnimalId;
+
     ArrayList<AnimalCut> animalCutNumbers;
 
-    public SlaughteredAnimal(int slaughtedAnimalId, ArrayList<AnimalCut> animalCutNumbers) {
-        this.slaughtedAnimalId = slaughtedAnimalId;
+    public SlaughteredAnimal(ArrayList<AnimalCut> animalCutNumbers) {
         this.animalCutNumbers = animalCutNumbers;
     }
 
-    public int getSlaughtedAnimalId() {
-        return slaughtedAnimalId;
-    }
 
     public ArrayList<AnimalCut> getAnimalCutNumbers() {
         return animalCutNumbers;

@@ -1,9 +1,6 @@
-package dk.via.sdj3_kursusopgave_part2.AnimalStack.AnimalServer;
+package dk.via.sdj3_kursusopgave_part2.AnimalStack.AnimalDBServer;
 
 import dk.via.sdj3_kursusopgave_part2.*;
-import dk.via.sdj3_kursusopgave_part2.AnimalStack.AnimalDatabaseServer.FileIO;
-import dk.via.sdj3_kursusopgave_part2.AnimalStack.AnimalDatabaseServer.IDatabaseServer;
-import dk.via.sdj3_kursusopgave_part2.AnimalStack.AnimalDatabaseServer.IFileIO;
 import dk.via.sdj3_kursusopgave_part2.Shared.DTOs.AnimalDto;
 import dk.via.sdj3_kursusopgave_part2.Shared.DTOs.FarmDto;
 import dk.via.sdj3_kursusopgave_part2.Shared.Domain.Animal;
@@ -11,21 +8,22 @@ import dk.via.sdj3_kursusopgave_part2.Shared.Domain.Farm;
 import io.grpc.stub.StreamObserver;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
+import org.springframework.format.datetime.DateFormatter;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
+import java.util.Locale;
 
 @Component
 @Scope("singleton")
-public class BusinessServer extends AnimalServiceGrpc.AnimalServiceImplBase {
-
-    private IDatabaseServer databaseServer; //TODO: remove
+public class AnimalDatabaseServer extends AnimalServiceGrpc.AnimalServiceImplBase {
 
     private Collection<Farm> farms;
     private Collection<Animal> animals;
     private IFileIO fileIO;
 
-    public BusinessServer() {
+    public AnimalDatabaseServer() {
         this.farms = new ArrayList<>();
         this.fileIO = new FileIO();
         farms = fileIO.loadFarms();
@@ -111,46 +109,65 @@ public class BusinessServer extends AnimalServiceGrpc.AnimalServiceImplBase {
 
         ArrayList<AnimalMessage> animalMessages = new ArrayList<>();
 
-//        for (Animal animal : animals) {
-//            animalMessages.add(
-//                    AnimalMessage.newBuilder()
-//                    .setAnimalId(animal.getAnimalId())
-//                    .setFarmId(animal.getFarmId())
-//                    .setWeight(animal.getWeight())
-//                    .setDateOfArrival(animal.getDateOfArrival())
-//                    .build()
-//            );
-//        }
+        for (Animal animal : animals) {
+            FarmMessage farm = FarmMessage
+                    .newBuilder()
+                    .setFarmName(animal.getFarm().getFarmName())
+                    .setId(animal.getFarm().getFarmId())
+                    .build();
+
+            animalMessages.add(
+                    AnimalMessage.newBuilder()
+                    .setId(animal.getAnimalId())
+                    .setFarm(farm)
+                    .setWeight(animal.getWeight())
+                    .setDate(animal.getDate())
+                    .build()
+            );
+        }
+
+        responseObserver.onNext(
+                GetAllAnimalsResponse.newBuilder()
+                .addAllAnimals(animalMessages)
+                .build()
+        );
+
+        responseObserver.onCompleted();
     }
 
-    public void createAnimal(AnimalDto animal) {
-        if (animal.getWeight() < 0)
-        {
-            throw new IllegalArgumentException("Weight cannot be negative");
-        }
-        else if (animal.getFarmId() < 1)
-        {
-            throw new IllegalArgumentException("FarmId cannot be 0 or negative");
-        }
-        else
-        {
-            databaseServer.createAnimal(animal);
-        }
+    public void createAnimal(CreateAnimalRequest request,
+                             StreamObserver<CreateAnimalResponse> responseObserver) {
+
+        AnimalDto animal = new AnimalDto(request.getFarmId(), request.getWeight());
+        //validateAnimal(animal);
+        Animal animalToAdd = new Animal(getFarm(animal.getFarmId()), animal.getWeight());
+        animalToAdd.setAnimalId(createAnimalId());
+        animalToAdd.setDate(createDate());
+        animals.add(animalToAdd);
+        fileIO.addAnimals(animals);
+
+        CreateAnimalResponse response = CreateAnimalResponse
+                .newBuilder()
+                .setMessage("Created, All OK")
+                .build();
+
+        responseObserver.onNext(response);
+        responseObserver.onCompleted();
     }
 
 
     public Animal getAnimal(int animalId) {
-        return databaseServer.getAnimal(animalId);
+        return null;
     }
 
 
     public Collection<Animal> getAllAnimalsByFarmId(int farmId) {
-        return databaseServer.getAllAnimalsByFarmId(farmId);
+        return null;
     }
 
 
     public Collection<Animal> getAllAnimalsByDateOfArrival(String dateOfArrival) {
-        return databaseServer.getAllAnimalsByDateOfArrival(dateOfArrival);
+        return null;
     }
 
 
@@ -190,5 +207,37 @@ public class BusinessServer extends AnimalServiceGrpc.AnimalServiceImplBase {
                 throw new IllegalArgumentException("Farm name already exists");
             }
         }
+    }
+
+    public String createAnimalId()
+    {
+        int currentHigestId = 0;
+        for (Animal i : animals) {
+            if (Integer.parseInt(i.getAnimalId()) > currentHigestId)
+            {
+                currentHigestId = Integer.parseInt(i.getAnimalId());
+            }
+        }
+        return String.valueOf(++currentHigestId);
+    }
+
+    private String createDate()
+    {
+        DateFormatter dateFormatter = new DateFormatter();
+        dateFormatter.setPattern("dd-MM-yyyy");
+        return dateFormatter.print(new Date(), Locale.getDefault());
+    }
+
+    private Farm getFarm(int id)
+    {
+        Farm farmToGet = null;
+        for (Farm i : farms) {
+            if (i.getFarmId() == id)
+            {
+                farmToGet = i;
+                break;
+            }
+        }
+        return farmToGet;
     }
 }

@@ -1,4 +1,4 @@
-package dk.via.sdj3_kursusopgave_part2.AnimalStack.AnimalDatabaseServer;
+package dk.via.sdj3_kursusopgave_part2.AnimalStack.AnimalDBServer;
 
 import dk.via.sdj3_kursusopgave_part2.Shared.Domain.Animal;
 import dk.via.sdj3_kursusopgave_part2.Shared.Domain.Farm;

@@ -1,4 +1,4 @@
-package dk.via.sdj3_kursusopgave_part2.AnimalStack.AnimalClient;
+package dk.via.sdj3_kursusopgave_part2.AnimalStack.AnimalBusinessServer;
 
 import dk.via.sdj3_kursusopgave_part2.Shared.DTOs.AnimalDto;
 import dk.via.sdj3_kursusopgave_part2.Shared.DTOs.FarmDto;

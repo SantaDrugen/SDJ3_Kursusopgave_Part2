@@ -1,11 +1,5 @@
-package dk.via.sdj3_kursusopgave_part2.AnimalStack.AnimalServer;
+package dk.via.sdj3_kursusopgave_part2.AnimalStack.AnimalDBServer;
 
-import dk.via.sdj3_kursusopgave_part2.AnimalServiceGrpc;
-import dk.via.sdj3_kursusopgave_part2.CreateFarmRequest;
-import dk.via.sdj3_kursusopgave_part2.CreateFarmResponse;
-import dk.via.sdj3_kursusopgave_part2.SlaughterHouseStack.BusinessServer_Actually_DB_Server.Server_GRPC_Client;
-import io.grpc.ManagedChannel;
-import io.grpc.ManagedChannelBuilder;
 import io.grpc.Server;
 
 import java.io.IOException;
@@ -14,7 +8,7 @@ public class AnimalServerMain {
     public static void main(String[] args) {
         Server server = io.grpc.ServerBuilder
                 .forPort(2345)
-                .addService(new BusinessServer())
+                .addService(new AnimalDatabaseServer())
                 .build();
         try {
             server.start();

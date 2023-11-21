@@ -1,7 +1,7 @@
-package dk.via.sdj3_kursusopgave_part2.AnimalStack.AnimalClient.Controllers;
+package dk.via.sdj3_kursusopgave_part2.AnimalStack.AnimalBusinessServer.Controllers;
 
-import dk.via.sdj3_kursusopgave_part2.AnimalStack.AnimalClient.AnimalStack_gRPC_ClientInterface;
-import dk.via.sdj3_kursusopgave_part2.AnimalStack.AnimalClient.AnimalWebAPI_ClientImpl;
+import dk.via.sdj3_kursusopgave_part2.AnimalStack.AnimalBusinessServer.AnimalStack_gRPC_ClientInterface;
+import dk.via.sdj3_kursusopgave_part2.AnimalStack.AnimalBusinessServer.AnimalWebAPI_ClientImpl;
 import dk.via.sdj3_kursusopgave_part2.Shared.DTOs.AnimalDto;
 import dk.via.sdj3_kursusopgave_part2.Shared.Domain.Animal;
 import org.springframework.beans.factory.annotation.Autowired;

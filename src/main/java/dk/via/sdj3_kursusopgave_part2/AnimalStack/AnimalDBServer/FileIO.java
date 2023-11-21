@@ -1,4 +1,4 @@
-package dk.via.sdj3_kursusopgave_part2.AnimalStack.AnimalDatabaseServer;
+package dk.via.sdj3_kursusopgave_part2.AnimalStack.AnimalDBServer;
 
 import dk.via.sdj3_kursusopgave_part2.Shared.Domain.Animal;
 import dk.via.sdj3_kursusopgave_part2.Shared.Domain.Farm;
@@ -9,8 +9,8 @@ import java.util.Collection;
 
 public class FileIO implements IFileIO{
 
-    private final String FILEPATHFARM = "src/main/java/dk/via/sdj3_kursusopgave_part2/AnimalStack/AnimalDatabaseServer/Database.Farm.ser";
-    private final String FILEPATHANIMAL = "src/main/java/dk/via/sdj3_kursusopgave_part2/AnimalStack/AnimalDatabaseServer/Database.Animal.ser";
+    private final String FILEPATHFARM = "src/main/java/dk/via/sdj3_kursusopgave_part2/AnimalStack/AnimalDBServer/Database.Farm.ser";
+    private final String FILEPATHANIMAL = "src/main/java/dk/via/sdj3_kursusopgave_part2/AnimalStack/AnimalDBServer/Database.Animal.ser";
 
     private FileOutputStream fileOutputStreamFarm;
     private ObjectOutputStream farmOut;

@@ -30,7 +30,7 @@ public class SlaughterHouseDatabaseServer {
             cuts.add(new AnimalCut(cutId));
         }
 
-        SlaughteredAnimal newlySlaughteredAnimal = new SlaughteredAnimal(dto.getAnimalId(), cuts);
+        SlaughteredAnimal newlySlaughteredAnimal = new SlaughteredAnimal(cuts);
 
         slaughteredAnimals.add(newlySlaughteredAnimal);
     }
