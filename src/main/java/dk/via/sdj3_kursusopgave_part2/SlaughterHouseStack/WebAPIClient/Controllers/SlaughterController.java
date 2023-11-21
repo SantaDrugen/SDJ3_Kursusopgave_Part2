@@ -22,6 +22,13 @@ public class SlaughterController {
         this.server = server;
     }
 
+    @GetMapping("/AllAnimals")
+    public ResponseEntity<Collection<AnimalCut>> getAllAnimals()
+    {
+        Collection<AnimalCut> body = server.getAllAnimals();
+        return ResponseEntity.ok().body(body);
+    }
+
     @GetMapping
     public ResponseEntity<Collection<AnimalCut>> getAllAnimalCuts()
     {

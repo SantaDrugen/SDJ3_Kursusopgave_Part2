@@ -1,6 +1,12 @@
 package dk.via.sdj3_kursusopgave_part2.AnimalStack.AnimalDatabaseServer;
 
+import com.rabbitmq.client.Channel;
+import com.rabbitmq.client.Connection;
+import com.rabbitmq.client.ConnectionFactory;
 import dk.via.sdj3_kursusopgave_part2.AnimalServiceGrpc;
+import dk.via.sdj3_kursusopgave_part2.AnimalStack.AnimalLogic.AnimalLogic;
+import dk.via.sdj3_kursusopgave_part2.AnimalStack.RabbitMQ.AnimalStackReceiver;
+import dk.via.sdj3_kursusopgave_part2.AnimalStack.RabbitMQ.AnimalStackSend;
 import dk.via.sdj3_kursusopgave_part2.CreateFarmRequest;
 import dk.via.sdj3_kursusopgave_part2.CreateFarmResponse;
 import dk.via.sdj3_kursusopgave_part2.Shared.DTOs.AnimalDto;
@@ -10,25 +16,57 @@ import dk.via.sdj3_kursusopgave_part2.Shared.Domain.Farm;
 import io.grpc.stub.StreamObserver;
 import org.springframework.format.datetime.DateFormatter;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Date;
-import java.util.Locale;
+import java.io.IOException;
+import java.util.*;
+import java.util.concurrent.TimeoutException;
 
-public class DatabaseServer extends AnimalServiceGrpc.AnimalServiceImplBase implements IDatabaseServer {
+public class DatabaseServer extends AnimalServiceGrpc.AnimalServiceImplBase implements IDatabaseServer, IDatabaseServerRabbitMQ {
 
     private Collection<Farm> farms;
-    private Collection<Animal> animals;
+    private Collection<Animal> animals = new ArrayList<>();
     private IFileIO fileIO;
+
+    AnimalLogic animalLogic = new AnimalLogic();
 
     public DatabaseServer() {
         this.farms = new ArrayList<>();
-        this.fileIO = new FileIO();
+/*        this.fileIO = new FileIO();
         farms = fileIO.loadFarms();
-        animals = fileIO.loadAnimals();
+        animals = fileIO.loadAnimals();*/
+
+        Animal animal1 = new Animal(new Farm("Farm1"), 100);
+        animal1.setDate("01-01-1111");
+
+        Animal animal2 = new Animal(new Farm("Farm2"), 200);
+        animal2.setDate("02-02-2222");
+
+        animals.add(animal1);
+        animals.add(animal2);
+
+
+        ConnectionFactory factory = new ConnectionFactory();
+        factory.setHost("localhost");
+        try(Connection connection = factory.newConnection();
+            Channel channel = connection.createChannel();
+            Scanner input = new Scanner(System.in))
+        {
+            channel.exchangeDeclare("AnimalStackExchange", "direct");
+            channel.queueDeclare("AnimalStackSend", false, false, false, null);
+            channel.queueBind("AnimalStackSend", "AnimalStackExchange", "get_all_animals_from_date");
+            System.out.println(" [*] Waiting for messages. To exit press CTRL+C");
+            channel.basicConsume("AnimalStackSend", true, (consumerTag, message) -> {
+                String messageAsString = new String(message.getBody(), "UTF-8");
+                System.out.println(" [x] Received '" + messageAsString + "'");
+                animalLogic.getAllAnimalsFromDate(getAllAnimalsByDateOfArrival(messageAsString));
+            }, consumerTag -> {});
+            input.nextLine();
+        } catch (IOException | TimeoutException e) {
+            throw new RuntimeException(e);
+        }
+
     }
-    public void createFarm(FarmDto farm)
-    {
+
+    public void createFarm(FarmDto farm) {
         Farm farmToAdd = new Farm(farm.getFarmName());
         farmToAdd.setFarmId(createFarmId());
         farms.add(farmToAdd);
@@ -55,8 +93,7 @@ public class DatabaseServer extends AnimalServiceGrpc.AnimalServiceImplBase impl
     public Farm getFarm(int farmId) {
         Farm farmToGet = null;
         for (Farm i : farms) {
-            if (i.getFarmId() == farmId)
-            {
+            if (i.getFarmId() == farmId) {
                 farmToGet = i;
                 break;
             }
@@ -71,12 +108,9 @@ public class DatabaseServer extends AnimalServiceGrpc.AnimalServiceImplBase impl
 
     @Override
     public void createAnimal(AnimalDto animal) {
-        if ( getFarmById(animal.getFarmId() ) == null)
-        {
+        if (getFarmById(animal.getFarmId()) == null) {
             throw new RuntimeException("Farm does not exist");
-        }
-        else
-        {
+        } else {
             Animal animalToAdd = new Animal(getFarmById(animal.getFarmId()), animal.getWeight());
             animalToAdd.setAnimalId(createAnimalId());
             animalToAdd.setDate(createDate());
@@ -90,8 +124,7 @@ public class DatabaseServer extends AnimalServiceGrpc.AnimalServiceImplBase impl
     public Animal getAnimal(int animalId) {
         Animal animalToGet = null;
         for (Animal i : animals) {
-            if (i.getAnimalId() == animalId)
-            {
+            if (i.getAnimalId() == animalId) {
                 animalToGet = i;
                 break;
             }
@@ -103,8 +136,7 @@ public class DatabaseServer extends AnimalServiceGrpc.AnimalServiceImplBase impl
     public Collection<Animal> getAllAnimalsByFarmId(int farmId) {
         ArrayList<Animal> animalsToGet = new ArrayList<>();
         for (Animal i : animals) {
-            if (i.getFarm().getFarmId() == farmId)
-            {
+            if (i.getFarm().getFarmId() == farmId) {
                 animalsToGet.add(i);
             }
         }
@@ -115,20 +147,17 @@ public class DatabaseServer extends AnimalServiceGrpc.AnimalServiceImplBase impl
     public Collection<Animal> getAllAnimalsByDateOfArrival(String dateOfArrival) {
         ArrayList<Animal> animalsToGet = new ArrayList<>();
         for (Animal i : animals) {
-            if (i.getDate().equals(dateOfArrival))
-            {
+            if (i.getDate().equals(dateOfArrival)) {
                 animalsToGet.add(i);
             }
         }
         return animalsToGet;
     }
 
-    private Farm getFarmById(int id)
-    {
+    private Farm getFarmById(int id) {
         Farm farmToGet = null;
         for (Farm i : farms) {
-            if (i.getFarmId() == id)
-            {
+            if (i.getFarmId() == id) {
                 farmToGet = i;
                 break;
             }
@@ -136,34 +165,35 @@ public class DatabaseServer extends AnimalServiceGrpc.AnimalServiceImplBase impl
         return farmToGet;
     }
 
-    public int createFarmId()
-    {
+    public int createFarmId() {
         int currentHighestId = 0;
         for (Farm i : farms) {
-            if (i.getFarmId() > currentHighestId)
-            {
+            if (i.getFarmId() > currentHighestId) {
                 currentHighestId = i.getFarmId();
             }
         }
         return ++currentHighestId;
     }
 
-    public int createAnimalId()
-    {
+    public int createAnimalId() {
         int currentHigestId = 0;
         for (Animal i : animals) {
-            if (i.getAnimalId() > currentHigestId)
-            {
+            if (i.getAnimalId() > currentHigestId) {
                 currentHigestId = i.getAnimalId();
             }
         }
         return ++currentHigestId;
     }
 
-    private String createDate()
-    {
+    private String createDate() {
         DateFormatter dateFormatter = new DateFormatter();
         dateFormatter.setPattern("dd-MM-yyyy");
         return dateFormatter.print(new Date(), Locale.getDefault());
     }
+
+    @Override
+    public void getAllAnimalsFromDate(String date) {
+        animalLogic.getAllAnimalsFromDate(getAllAnimalsByDateOfArrival(date));
+    }
 }
+

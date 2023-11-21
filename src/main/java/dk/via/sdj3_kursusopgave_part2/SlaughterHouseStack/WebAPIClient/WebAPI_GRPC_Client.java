@@ -2,13 +2,14 @@ package dk.via.sdj3_kursusopgave_part2.SlaughterHouseStack.WebAPIClient;
 
 import dk.via.sdj3_kursusopgave_part2.GetAllAnimalCutsRequest;
 import dk.via.sdj3_kursusopgave_part2.GetAllAnimalCutsResponse;
+import dk.via.sdj3_kursusopgave_part2.Shared.Domain.Animal;
 import dk.via.sdj3_kursusopgave_part2.Shared.Domain.AnimalCut;
+import dk.via.sdj3_kursusopgave_part2.Shared.Domain.SlaughteredAnimal;
 import dk.via.sdj3_kursusopgave_part2.SlaughterHouseStack.IServer;
 
 import dk.via.sdj3_kursusopgave_part2.SlaughterServiceGrpc;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
@@ -46,4 +47,10 @@ public class WebAPI_GRPC_Client implements IServer {
 
         return animalCuts;
     }
+
+    @Override
+    public SlaughteredAnimal slaughterAnimal() {
+
+    }
+
 }

@@ -7,6 +7,11 @@ message AnimalCut {
   string cutId = 1;
 }
 
+message Farm {
+  string farmName = 1;
+  int32 id = 2;
+}
+
 message GetAllAnimalCutsResponse {
   repeated AnimalCut animalCuts = 1;
 }
@@ -16,4 +21,23 @@ message GetAllAnimalCutsResponse {
 
 service SlaughterService {
   rpc GetAllAnimalCuts(GetAllAnimalCutsRequest) returns (GetAllAnimalCutsResponse);
+}
+
+message AnimalMessage {
+  Farm farm = 1;
+  double weight = 2;
+  string animalId = 3;
+  string date = 4;
+}
+
+message GetAnimalResponse {
+  AnimalMessage animal = 1;
+}
+
+message GetAnimalRequest {
+  int32 animalId = 1;
+}
+
+service AnimalService {
+  rpc GetAnimal(GetAnimalRequest) returns (GetAnimalResponse);
 }

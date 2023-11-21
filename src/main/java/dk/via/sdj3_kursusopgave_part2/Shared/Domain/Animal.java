@@ -48,4 +48,14 @@ public class Animal implements Serializable {
     public void setDate(String date) {
         this.date = date;
     }
+
+    @Override
+    public String toString() {
+        return "Animal{" +
+                "farm=" + farm +
+                ", weight=" + weight +
+                ", animalId=" + animalId +
+                ", date='" + date + '\'' +
+                '}';
+    }
 }

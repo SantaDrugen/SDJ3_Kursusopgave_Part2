@@ -24,4 +24,6 @@ public interface IDatabaseServer {
     public Collection<Animal> getAllAnimalsByFarmId(int farmId);
 
     public Collection<Animal> getAllAnimalsByDateOfArrival(String dateOfArrival);
+
+
 }

@@ -1,4 +1,4 @@
-package dk.via.sdj3_kursusopgave_part2.SlaughterHouseStack;
+package dk.via.sdj3_kursusopgave_part2.SlaughterHouseStack.Database;
 
 import dk.via.sdj3_kursusopgave_part2.Shared.DTOs.SlaughterAnimalDTO;
 import dk.via.sdj3_kursusopgave_part2.Shared.Domain.AnimalCut;
