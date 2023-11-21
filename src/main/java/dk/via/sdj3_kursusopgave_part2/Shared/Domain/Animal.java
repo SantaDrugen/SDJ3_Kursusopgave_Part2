@@ -6,7 +6,7 @@ public class Animal implements Serializable {
 
     private Farm farm;
     private double weight;
-    private int animalId;
+    private String animalId;
     private String date;
 
     public Animal(Farm farm, double weight) {
@@ -33,11 +33,11 @@ public class Animal implements Serializable {
         this.weight = weight;
     }
 
-    public int getAnimalId() {
+    public String getAnimalId() {
         return animalId;
     }
 
-    public void setAnimalId(int animalId) {
+    public void setAnimalId(String animalId) {
         this.animalId = animalId;
     }
 

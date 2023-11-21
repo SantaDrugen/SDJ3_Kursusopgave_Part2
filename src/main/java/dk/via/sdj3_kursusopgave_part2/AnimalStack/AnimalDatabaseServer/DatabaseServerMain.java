@@ -1,3 +1,4 @@
+/*
 package dk.via.sdj3_kursusopgave_part2.AnimalStack.AnimalDatabaseServer;
 
 import io.grpc.Server;
@@ -9,7 +10,7 @@ public class DatabaseServerMain {
     public static void main(String[] args) {
         Server server = ServerBuilder
                 .forPort(1234)
-                .addService(new DatabaseServer())
+                .addService()
                 .build();
 
         try {
@@ -23,3 +24,4 @@ public class DatabaseServerMain {
         System.out.println("Server started");
     }
 }
+*/

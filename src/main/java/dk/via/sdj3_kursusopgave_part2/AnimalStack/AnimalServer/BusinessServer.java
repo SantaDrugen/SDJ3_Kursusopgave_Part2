@@ -1,8 +1,9 @@
 package dk.via.sdj3_kursusopgave_part2.AnimalStack.AnimalServer;
 
 import dk.via.sdj3_kursusopgave_part2.*;
-import dk.via.sdj3_kursusopgave_part2.AnimalStack.AnimalDatabaseServer.DatabaseServer;
+import dk.via.sdj3_kursusopgave_part2.AnimalStack.AnimalDatabaseServer.FileIO;
 import dk.via.sdj3_kursusopgave_part2.AnimalStack.AnimalDatabaseServer.IDatabaseServer;
+import dk.via.sdj3_kursusopgave_part2.AnimalStack.AnimalDatabaseServer.IFileIO;
 import dk.via.sdj3_kursusopgave_part2.Shared.DTOs.AnimalDto;
 import dk.via.sdj3_kursusopgave_part2.Shared.DTOs.FarmDto;
 import dk.via.sdj3_kursusopgave_part2.Shared.Domain.Animal;
@@ -18,25 +19,46 @@ import java.util.Collection;
 @Scope("singleton")
 public class BusinessServer extends AnimalServiceGrpc.AnimalServiceImplBase {
 
-    private IDatabaseServer databaseServer;
+    private IDatabaseServer databaseServer; //TODO: remove
+
+    private Collection<Farm> farms;
+    private Collection<Animal> animals;
+    private IFileIO fileIO;
 
     public BusinessServer() {
-        databaseServer = new DatabaseServer();
+        this.farms = new ArrayList<>();
+        this.fileIO = new FileIO();
+        farms = fileIO.loadFarms();
+        animals = fileIO.loadAnimals();
     }
 
-    public Farm createFarm(FarmDto farm) {
-        if (farm.getFarmName() == null)
-        {
-            throw new IllegalArgumentException("Farm name cannot be null");
-        }
-        databaseServer.createFarm(farm);
-        throw new RuntimeException(); //TODO
+    public void createFarm(CreateFarmRequest request,
+                           StreamObserver<CreateFarmResponse> responseObserver) {
+
+        FarmDto farm = new FarmDto(request.getFarmName());
+        validateFarm(farm);
+        Farm farmToAdd = new Farm(farm.getFarmName());
+        farmToAdd.setFarmId(createFarmId());
+        farms.add(farmToAdd);
+        fileIO.addFarm(farms);
+
+        FarmMessage farmMessage = FarmMessage
+                .newBuilder()
+                .setFarmName(farm.getFarmName())
+                .setId(farmToAdd.getFarmId())
+                .build();
+
+        CreateFarmResponse response = CreateFarmResponse
+                .newBuilder()
+                .setFarmMessage(farmMessage)
+                .build();
+
+        responseObserver.onNext(response);
+        responseObserver.onCompleted();
     }
 
     public void getAllFarms(GetAllFarmsRequest request,
                                         StreamObserver<GetAllFarmsResponse> responseObserver) {
-        ArrayList<Farm> farms = new ArrayList<>();
-        farms.addAll(databaseServer.getAllFarms());
 
         ArrayList<FarmMessage> farmMessages = new ArrayList<>();
 
@@ -59,13 +81,46 @@ public class BusinessServer extends AnimalServiceGrpc.AnimalServiceImplBase {
     }
 
 
-    public Farm getFarm(int farmId) {
-        return databaseServer.getFarm(farmId);
+    public void getFarm(GetFarmRequest request,
+                        StreamObserver<FarmMessage> responseObserver) {
+        boolean exists = false;
+
+        for (Farm farm : farms)
+        {
+            if (farm.getFarmId() == request.getId())
+            {
+                exists = true;
+                responseObserver.onNext(
+                        FarmMessage.newBuilder()
+                        .setFarmName(farm.getFarmName())
+                        .setId(farm.getFarmId())
+                        .build()
+                );
+                responseObserver.onCompleted();
+            }
+        }
+        if (!exists)
+        {
+            responseObserver.onError(new RuntimeException("Farm does not exist"));
+        }
     }
 
 
-    public Collection<Animal> getAllAnimals() {
-        return databaseServer.getAllAnimals();
+    public void getAllAnimals(GetAllAnimalsRequest request,
+                                            StreamObserver<GetAllAnimalsResponse> responseObserver) {
+
+        ArrayList<AnimalMessage> animalMessages = new ArrayList<>();
+
+//        for (Animal animal : animals) {
+//            animalMessages.add(
+//                    AnimalMessage.newBuilder()
+//                    .setAnimalId(animal.getAnimalId())
+//                    .setFarmId(animal.getFarmId())
+//                    .setWeight(animal.getWeight())
+//                    .setDateOfArrival(animal.getDateOfArrival())
+//                    .build()
+//            );
+//        }
     }
 
     public void createAnimal(AnimalDto animal) {
@@ -99,4 +154,41 @@ public class BusinessServer extends AnimalServiceGrpc.AnimalServiceImplBase {
     }
 
 
+
+    private int createFarmId()
+    {
+        int currentHighestId = 0;
+        for (Farm i : farms) {
+            if (i.getFarmId() > currentHighestId)
+            {
+                currentHighestId = i.getFarmId();
+            }
+        }
+        return ++currentHighestId;
+    }
+
+
+    private void validateFarm(FarmDto farm) {
+        if (farm.getFarmName().length() < 1)
+        {
+            throw new IllegalArgumentException("Farm name cannot be empty");
+        }
+
+        if (farm.getFarmName().length() > 32)
+        {
+            throw new IllegalArgumentException("Farm name cannot be longer than 32 characters");
+        }
+
+        if (farm.getFarmName() == null)
+        {
+            throw new IllegalArgumentException("Farm name cannot be null");
+        }
+
+        for (Farm obj : farms) {
+            if (obj.getFarmName().equals(farm.getFarmName()))
+            {
+                throw new IllegalArgumentException("Farm name already exists");
+            }
+        }
+    }
 }

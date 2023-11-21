@@ -1,3 +1,4 @@
+/*
 package dk.via.sdj3_kursusopgave_part2.AnimalStack.AnimalDatabaseServer;
 
 import dk.via.sdj3_kursusopgave_part2.AnimalServiceGrpc;
@@ -172,3 +173,4 @@ public class DatabaseServer extends AnimalServiceGrpc.AnimalServiceImplBase impl
         return dateFormatter.print(new Date(), Locale.getDefault());
     }
 }
+*/

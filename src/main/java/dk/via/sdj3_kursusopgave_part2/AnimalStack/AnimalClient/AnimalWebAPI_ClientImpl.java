@@ -84,14 +84,14 @@ public class AnimalWebAPI_ClientImpl implements AnimalStack_gRPC_ClientInterface
 
         ArrayList<Animal> animals = new ArrayList<>();
 
-        for (AnimalMessage animalMessage : response.getAnimalsList()) {
-            Animal animal = new Animal();
-            animal.setAnimalId(animalMessage.getId());
-            animal.setWeight(animalMessage.getWeight());
-            animal.setDate(animalMessage.getDate());
-            animal.setFarm(new Farm(animalMessage.getFarm().getFarmName()));
-            animals.add(animal);
-        }
+//        for (AnimalMessage animalMessage : response.getAnimalsList()) {
+//            Animal animal = new Animal();
+//            animal.setAnimalId(animalMessage.getId());
+//            animal.setWeight(animalMessage.getWeight());
+//            animal.setDate(animalMessage.getDate());
+//            animal.setFarm(new Farm(animalMessage.getFarm().getFarmName()));
+//            animals.add(animal);
+//        }
 
         return animals;
     }

@@ -119,7 +119,7 @@ public final class AnimalServiceOuterClass {
       "armMessage\"\034\n\016GetFarmRequest\022\n\n\002id\030\001 \001(\005" +
       "\"t\n\rAnimalMessage\0229\n\004farm\030\001 \001(\0132+.dk.via",
       ".sdj3_kursusopgave_part2.FarmMessage\022\016\n\006" +
-      "weight\030\002 \001(\001\022\n\n\002id\030\003 \001(\005\022\014\n\004date\030\004 \001(\t\"\026" +
+      "weight\030\002 \001(\001\022\n\n\002id\030\003 \001(\t\022\014\n\004date\030\004 \001(\t\"\026" +
       "\n\024GetAllAnimalsRequest\"W\n\025GetAllAnimalsR" +
       "esponse\022>\n\007animals\030\001 \003(\0132-.dk.via.sdj3_k" +
       "ursusopgave_part2.AnimalMessage\"5\n\023Creat" +

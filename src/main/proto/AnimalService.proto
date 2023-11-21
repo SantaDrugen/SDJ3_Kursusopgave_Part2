@@ -34,7 +34,7 @@ message GetFarmRequest {
 message AnimalMessage {
     FarmMessage farm = 1;
     double weight = 2;
-    int32 id = 3;
+    string id = 3;
     string date = 4;
 }
 
