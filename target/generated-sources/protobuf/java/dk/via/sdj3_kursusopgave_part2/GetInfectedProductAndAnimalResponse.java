@@ -56,11 +56,11 @@ public  final class GetInfectedProductAndAnimalResponse extends
             break;
           }
           case 18: {
-            dk.via.sdj3_kursusopgave_part2.ProductList.Builder subBuilder = null;
+            dk.via.sdj3_kursusopgave_part2.ProductListMessage.Builder subBuilder = null;
             if (product_ != null) {
               subBuilder = product_.toBuilder();
             }
-            product_ = input.readMessage(dk.via.sdj3_kursusopgave_part2.ProductList.parser(), extensionRegistry);
+            product_ = input.readMessage(dk.via.sdj3_kursusopgave_part2.ProductListMessage.parser(), extensionRegistry);
             if (subBuilder != null) {
               subBuilder.mergeFrom(product_);
               product_ = subBuilder.buildPartial();
@@ -81,12 +81,12 @@ public  final class GetInfectedProductAndAnimalResponse extends
   }
   public static final com.google.protobuf.Descriptors.Descriptor
       getDescriptor() {
-    return dk.via.sdj3_kursusopgave_part2.FactoryService.internal_static_dk_via_sdj3_kursusopgave_part2_GetInfectedProductAndAnimalResponse_descriptor;
+    return dk.via.sdj3_kursusopgave_part2.FactoryServiceOuterClass.internal_static_dk_via_sdj3_kursusopgave_part2_GetInfectedProductAndAnimalResponse_descriptor;
   }
 
   protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internalGetFieldAccessorTable() {
-    return dk.via.sdj3_kursusopgave_part2.FactoryService.internal_static_dk_via_sdj3_kursusopgave_part2_GetInfectedProductAndAnimalResponse_fieldAccessorTable
+    return dk.via.sdj3_kursusopgave_part2.FactoryServiceOuterClass.internal_static_dk_via_sdj3_kursusopgave_part2_GetInfectedProductAndAnimalResponse_fieldAccessorTable
         .ensureFieldAccessorsInitialized(
             dk.via.sdj3_kursusopgave_part2.GetInfectedProductAndAnimalResponse.class, dk.via.sdj3_kursusopgave_part2.GetInfectedProductAndAnimalResponse.Builder.class);
   }
@@ -113,23 +113,23 @@ public  final class GetInfectedProductAndAnimalResponse extends
   }
 
   public static final int PRODUCT_FIELD_NUMBER = 2;
-  private dk.via.sdj3_kursusopgave_part2.ProductList product_;
+  private dk.via.sdj3_kursusopgave_part2.ProductListMessage product_;
   /**
-   * <code>.dk.via.sdj3_kursusopgave_part2.ProductList product = 2;</code>
+   * <code>.dk.via.sdj3_kursusopgave_part2.ProductListMessage product = 2;</code>
    */
   public boolean hasProduct() {
     return product_ != null;
   }
   /**
-   * <code>.dk.via.sdj3_kursusopgave_part2.ProductList product = 2;</code>
+   * <code>.dk.via.sdj3_kursusopgave_part2.ProductListMessage product = 2;</code>
    */
-  public dk.via.sdj3_kursusopgave_part2.ProductList getProduct() {
-    return product_ == null ? dk.via.sdj3_kursusopgave_part2.ProductList.getDefaultInstance() : product_;
+  public dk.via.sdj3_kursusopgave_part2.ProductListMessage getProduct() {
+    return product_ == null ? dk.via.sdj3_kursusopgave_part2.ProductListMessage.getDefaultInstance() : product_;
   }
   /**
-   * <code>.dk.via.sdj3_kursusopgave_part2.ProductList product = 2;</code>
+   * <code>.dk.via.sdj3_kursusopgave_part2.ProductListMessage product = 2;</code>
    */
-  public dk.via.sdj3_kursusopgave_part2.ProductListOrBuilder getProductOrBuilder() {
+  public dk.via.sdj3_kursusopgave_part2.ProductListMessageOrBuilder getProductOrBuilder() {
     return getProduct();
   }
 
@@ -312,12 +312,12 @@ public  final class GetInfectedProductAndAnimalResponse extends
       dk.via.sdj3_kursusopgave_part2.GetInfectedProductAndAnimalResponseOrBuilder {
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return dk.via.sdj3_kursusopgave_part2.FactoryService.internal_static_dk_via_sdj3_kursusopgave_part2_GetInfectedProductAndAnimalResponse_descriptor;
+      return dk.via.sdj3_kursusopgave_part2.FactoryServiceOuterClass.internal_static_dk_via_sdj3_kursusopgave_part2_GetInfectedProductAndAnimalResponse_descriptor;
     }
 
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return dk.via.sdj3_kursusopgave_part2.FactoryService.internal_static_dk_via_sdj3_kursusopgave_part2_GetInfectedProductAndAnimalResponse_fieldAccessorTable
+      return dk.via.sdj3_kursusopgave_part2.FactoryServiceOuterClass.internal_static_dk_via_sdj3_kursusopgave_part2_GetInfectedProductAndAnimalResponse_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
               dk.via.sdj3_kursusopgave_part2.GetInfectedProductAndAnimalResponse.class, dk.via.sdj3_kursusopgave_part2.GetInfectedProductAndAnimalResponse.Builder.class);
     }
@@ -356,7 +356,7 @@ public  final class GetInfectedProductAndAnimalResponse extends
 
     public com.google.protobuf.Descriptors.Descriptor
         getDescriptorForType() {
-      return dk.via.sdj3_kursusopgave_part2.FactoryService.internal_static_dk_via_sdj3_kursusopgave_part2_GetInfectedProductAndAnimalResponse_descriptor;
+      return dk.via.sdj3_kursusopgave_part2.FactoryServiceOuterClass.internal_static_dk_via_sdj3_kursusopgave_part2_GetInfectedProductAndAnimalResponse_descriptor;
     }
 
     public dk.via.sdj3_kursusopgave_part2.GetInfectedProductAndAnimalResponse getDefaultInstanceForType() {
@@ -573,29 +573,29 @@ public  final class GetInfectedProductAndAnimalResponse extends
       return animalBuilder_;
     }
 
-    private dk.via.sdj3_kursusopgave_part2.ProductList product_ = null;
+    private dk.via.sdj3_kursusopgave_part2.ProductListMessage product_ = null;
     private com.google.protobuf.SingleFieldBuilderV3<
-        dk.via.sdj3_kursusopgave_part2.ProductList, dk.via.sdj3_kursusopgave_part2.ProductList.Builder, dk.via.sdj3_kursusopgave_part2.ProductListOrBuilder> productBuilder_;
+        dk.via.sdj3_kursusopgave_part2.ProductListMessage, dk.via.sdj3_kursusopgave_part2.ProductListMessage.Builder, dk.via.sdj3_kursusopgave_part2.ProductListMessageOrBuilder> productBuilder_;
     /**
-     * <code>.dk.via.sdj3_kursusopgave_part2.ProductList product = 2;</code>
+     * <code>.dk.via.sdj3_kursusopgave_part2.ProductListMessage product = 2;</code>
      */
     public boolean hasProduct() {
       return productBuilder_ != null || product_ != null;
     }
     /**
-     * <code>.dk.via.sdj3_kursusopgave_part2.ProductList product = 2;</code>
+     * <code>.dk.via.sdj3_kursusopgave_part2.ProductListMessage product = 2;</code>
      */
-    public dk.via.sdj3_kursusopgave_part2.ProductList getProduct() {
+    public dk.via.sdj3_kursusopgave_part2.ProductListMessage getProduct() {
       if (productBuilder_ == null) {
-        return product_ == null ? dk.via.sdj3_kursusopgave_part2.ProductList.getDefaultInstance() : product_;
+        return product_ == null ? dk.via.sdj3_kursusopgave_part2.ProductListMessage.getDefaultInstance() : product_;
       } else {
         return productBuilder_.getMessage();
       }
     }
     /**
-     * <code>.dk.via.sdj3_kursusopgave_part2.ProductList product = 2;</code>
+     * <code>.dk.via.sdj3_kursusopgave_part2.ProductListMessage product = 2;</code>
      */
-    public Builder setProduct(dk.via.sdj3_kursusopgave_part2.ProductList value) {
+    public Builder setProduct(dk.via.sdj3_kursusopgave_part2.ProductListMessage value) {
       if (productBuilder_ == null) {
         if (value == null) {
           throw new NullPointerException();
@@ -609,10 +609,10 @@ public  final class GetInfectedProductAndAnimalResponse extends
       return this;
     }
     /**
-     * <code>.dk.via.sdj3_kursusopgave_part2.ProductList product = 2;</code>
+     * <code>.dk.via.sdj3_kursusopgave_part2.ProductListMessage product = 2;</code>
      */
     public Builder setProduct(
-        dk.via.sdj3_kursusopgave_part2.ProductList.Builder builderForValue) {
+        dk.via.sdj3_kursusopgave_part2.ProductListMessage.Builder builderForValue) {
       if (productBuilder_ == null) {
         product_ = builderForValue.build();
         onChanged();
@@ -623,13 +623,13 @@ public  final class GetInfectedProductAndAnimalResponse extends
       return this;
     }
     /**
-     * <code>.dk.via.sdj3_kursusopgave_part2.ProductList product = 2;</code>
+     * <code>.dk.via.sdj3_kursusopgave_part2.ProductListMessage product = 2;</code>
      */
-    public Builder mergeProduct(dk.via.sdj3_kursusopgave_part2.ProductList value) {
+    public Builder mergeProduct(dk.via.sdj3_kursusopgave_part2.ProductListMessage value) {
       if (productBuilder_ == null) {
         if (product_ != null) {
           product_ =
-            dk.via.sdj3_kursusopgave_part2.ProductList.newBuilder(product_).mergeFrom(value).buildPartial();
+            dk.via.sdj3_kursusopgave_part2.ProductListMessage.newBuilder(product_).mergeFrom(value).buildPartial();
         } else {
           product_ = value;
         }
@@ -641,7 +641,7 @@ public  final class GetInfectedProductAndAnimalResponse extends
       return this;
     }
     /**
-     * <code>.dk.via.sdj3_kursusopgave_part2.ProductList product = 2;</code>
+     * <code>.dk.via.sdj3_kursusopgave_part2.ProductListMessage product = 2;</code>
      */
     public Builder clearProduct() {
       if (productBuilder_ == null) {
@@ -655,33 +655,33 @@ public  final class GetInfectedProductAndAnimalResponse extends
       return this;
     }
     /**
-     * <code>.dk.via.sdj3_kursusopgave_part2.ProductList product = 2;</code>
+     * <code>.dk.via.sdj3_kursusopgave_part2.ProductListMessage product = 2;</code>
      */
-    public dk.via.sdj3_kursusopgave_part2.ProductList.Builder getProductBuilder() {
+    public dk.via.sdj3_kursusopgave_part2.ProductListMessage.Builder getProductBuilder() {
       
       onChanged();
       return getProductFieldBuilder().getBuilder();
     }
     /**
-     * <code>.dk.via.sdj3_kursusopgave_part2.ProductList product = 2;</code>
+     * <code>.dk.via.sdj3_kursusopgave_part2.ProductListMessage product = 2;</code>
      */
-    public dk.via.sdj3_kursusopgave_part2.ProductListOrBuilder getProductOrBuilder() {
+    public dk.via.sdj3_kursusopgave_part2.ProductListMessageOrBuilder getProductOrBuilder() {
       if (productBuilder_ != null) {
         return productBuilder_.getMessageOrBuilder();
       } else {
         return product_ == null ?
-            dk.via.sdj3_kursusopgave_part2.ProductList.getDefaultInstance() : product_;
+            dk.via.sdj3_kursusopgave_part2.ProductListMessage.getDefaultInstance() : product_;
       }
     }
     /**
-     * <code>.dk.via.sdj3_kursusopgave_part2.ProductList product = 2;</code>
+     * <code>.dk.via.sdj3_kursusopgave_part2.ProductListMessage product = 2;</code>
      */
     private com.google.protobuf.SingleFieldBuilderV3<
-        dk.via.sdj3_kursusopgave_part2.ProductList, dk.via.sdj3_kursusopgave_part2.ProductList.Builder, dk.via.sdj3_kursusopgave_part2.ProductListOrBuilder> 
+        dk.via.sdj3_kursusopgave_part2.ProductListMessage, dk.via.sdj3_kursusopgave_part2.ProductListMessage.Builder, dk.via.sdj3_kursusopgave_part2.ProductListMessageOrBuilder> 
         getProductFieldBuilder() {
       if (productBuilder_ == null) {
         productBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
-            dk.via.sdj3_kursusopgave_part2.ProductList, dk.via.sdj3_kursusopgave_part2.ProductList.Builder, dk.via.sdj3_kursusopgave_part2.ProductListOrBuilder>(
+            dk.via.sdj3_kursusopgave_part2.ProductListMessage, dk.via.sdj3_kursusopgave_part2.ProductListMessage.Builder, dk.via.sdj3_kursusopgave_part2.ProductListMessageOrBuilder>(
                 getProduct(),
                 getParentForChildren(),
                 isClean());

@@ -293,7 +293,7 @@ public class AnimalDatabaseServer extends AnimalServiceGrpc.AnimalServiceImplBas
 
     public String createAnimalId()
     {
-        int currentHigestId = 0;
+        int currentHigestId = animals.size();
         for (Animal i : animals) {
             if (Integer.parseInt(i.getAnimalId()) > currentHigestId)
             {

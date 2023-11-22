@@ -68,12 +68,12 @@ public  final class AnimalList extends
   }
   public static final com.google.protobuf.Descriptors.Descriptor
       getDescriptor() {
-    return dk.via.sdj3_kursusopgave_part2.FactoryService.internal_static_dk_via_sdj3_kursusopgave_part2_AnimalList_descriptor;
+    return dk.via.sdj3_kursusopgave_part2.FactoryServiceOuterClass.internal_static_dk_via_sdj3_kursusopgave_part2_AnimalList_descriptor;
   }
 
   protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internalGetFieldAccessorTable() {
-    return dk.via.sdj3_kursusopgave_part2.FactoryService.internal_static_dk_via_sdj3_kursusopgave_part2_AnimalList_fieldAccessorTable
+    return dk.via.sdj3_kursusopgave_part2.FactoryServiceOuterClass.internal_static_dk_via_sdj3_kursusopgave_part2_AnimalList_fieldAccessorTable
         .ensureFieldAccessorsInitialized(
             dk.via.sdj3_kursusopgave_part2.AnimalList.class, dk.via.sdj3_kursusopgave_part2.AnimalList.Builder.class);
   }
@@ -271,12 +271,12 @@ public  final class AnimalList extends
       dk.via.sdj3_kursusopgave_part2.AnimalListOrBuilder {
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return dk.via.sdj3_kursusopgave_part2.FactoryService.internal_static_dk_via_sdj3_kursusopgave_part2_AnimalList_descriptor;
+      return dk.via.sdj3_kursusopgave_part2.FactoryServiceOuterClass.internal_static_dk_via_sdj3_kursusopgave_part2_AnimalList_descriptor;
     }
 
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return dk.via.sdj3_kursusopgave_part2.FactoryService.internal_static_dk_via_sdj3_kursusopgave_part2_AnimalList_fieldAccessorTable
+      return dk.via.sdj3_kursusopgave_part2.FactoryServiceOuterClass.internal_static_dk_via_sdj3_kursusopgave_part2_AnimalList_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
               dk.via.sdj3_kursusopgave_part2.AnimalList.class, dk.via.sdj3_kursusopgave_part2.AnimalList.Builder.class);
     }
@@ -305,7 +305,7 @@ public  final class AnimalList extends
 
     public com.google.protobuf.Descriptors.Descriptor
         getDescriptorForType() {
-      return dk.via.sdj3_kursusopgave_part2.FactoryService.internal_static_dk_via_sdj3_kursusopgave_part2_AnimalList_descriptor;
+      return dk.via.sdj3_kursusopgave_part2.FactoryServiceOuterClass.internal_static_dk_via_sdj3_kursusopgave_part2_AnimalList_descriptor;
     }
 
     public dk.via.sdj3_kursusopgave_part2.AnimalList getDefaultInstanceForType() {

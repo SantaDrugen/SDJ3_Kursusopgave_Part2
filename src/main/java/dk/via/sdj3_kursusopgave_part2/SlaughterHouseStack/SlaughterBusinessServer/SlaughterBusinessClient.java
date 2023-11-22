@@ -4,8 +4,6 @@ import dk.via.sdj3_kursusopgave_part2.*;
 import dk.via.sdj3_kursusopgave_part2.Shared.Domain.Animal;
 import dk.via.sdj3_kursusopgave_part2.Shared.Domain.AnimalCut;
 import dk.via.sdj3_kursusopgave_part2.Shared.Domain.Farm;
-import dk.via.sdj3_kursusopgave_part2.Shared.Domain.SlaughteredAnimal;
-import dk.via.sdj3_kursusopgave_part2.SlaughterHouseStack.IServer;
 
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
@@ -17,7 +15,7 @@ import java.util.Collection;
 
 @Component("SlaughterBusinessClient")
 @Scope("singleton")
-public class SlaughterBusinessClient implements IServer {
+public class SlaughterBusinessClient implements ISlaughterBusinessClient {
 
 
     @Override

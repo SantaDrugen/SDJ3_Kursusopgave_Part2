@@ -1,11 +1,11 @@
-package dk.via.sdj3_kursusopgave_part2.FactoryStack.FactoryClient;
+package dk.via.sdj3_kursusopgave_part2.FactoryStack.FactoryBusinessServer;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class FactoryClient {
+public class FactoryBusinessMain {
     public static void main(String[] args) {
-        SpringApplication.run(FactoryClient.class, args);
+        SpringApplication.run(FactoryBusinessMain.class, args);
     }
 }

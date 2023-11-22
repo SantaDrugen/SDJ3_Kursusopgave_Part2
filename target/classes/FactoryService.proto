@@ -7,10 +7,18 @@ message AnimalList {
   repeated string animalId = 1;
 }
 
-message ProductList {
-  repeated string productId = 1;
+message CutProductMessage{
+  string cutId = 1;
 }
 
+message ProductMessage {
+  string productId = 1;
+  repeated CutProductMessage cuts = 2;
+}
+
+message ProductListMessage {
+  repeated ProductMessage products = 1;
+}
 
 message GetInfectedProductAndAnimalRequest {
   string animalId = 1;
@@ -19,9 +27,38 @@ message GetInfectedProductAndAnimalRequest {
 
 message GetInfectedProductAndAnimalResponse {
   AnimalList animal = 1;
-  ProductList product = 2;
+  ProductListMessage product = 2;
 }
 
-service InfectedService {
+message GetAllProductsRequest {
+}
+
+message CreateProductRequest {
+}
+
+message CreateProductResponse {
+  repeated string cutIds = 1;
+}
+
+message CreateProductIdRequest{
+}
+
+message CreateProductIdResponse{
+  string productId = 1;
+}
+
+message SaveProductChangesRequest{
+  ProductMessage product = 1;
+}
+
+message SaveProductChangesResponse{
+  string message = 1;
+}
+
+service FactoryService {
   rpc getInfectedProductAndAnimal(GetInfectedProductAndAnimalRequest) returns (GetInfectedProductAndAnimalResponse);
+  rpc getAllProducts(GetAllProductsRequest) returns (ProductListMessage);
+  rpc createProduct(CreateProductRequest) returns (CreateProductResponse);
+  rpc createProductId(CreateProductIdRequest) returns (CreateProductIdResponse);
+  rpc saveProductChanges(SaveProductChangesRequest) returns (SaveProductChangesResponse);
 }

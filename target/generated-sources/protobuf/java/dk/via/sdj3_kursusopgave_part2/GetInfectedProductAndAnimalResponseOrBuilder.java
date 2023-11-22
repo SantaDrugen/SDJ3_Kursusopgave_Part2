@@ -21,15 +21,15 @@ public interface GetInfectedProductAndAnimalResponseOrBuilder extends
   dk.via.sdj3_kursusopgave_part2.AnimalListOrBuilder getAnimalOrBuilder();
 
   /**
-   * <code>.dk.via.sdj3_kursusopgave_part2.ProductList product = 2;</code>
+   * <code>.dk.via.sdj3_kursusopgave_part2.ProductListMessage product = 2;</code>
    */
   boolean hasProduct();
   /**
-   * <code>.dk.via.sdj3_kursusopgave_part2.ProductList product = 2;</code>
+   * <code>.dk.via.sdj3_kursusopgave_part2.ProductListMessage product = 2;</code>
    */
-  dk.via.sdj3_kursusopgave_part2.ProductList getProduct();
+  dk.via.sdj3_kursusopgave_part2.ProductListMessage getProduct();
   /**
-   * <code>.dk.via.sdj3_kursusopgave_part2.ProductList product = 2;</code>
+   * <code>.dk.via.sdj3_kursusopgave_part2.ProductListMessage product = 2;</code>
    */
-  dk.via.sdj3_kursusopgave_part2.ProductListOrBuilder getProductOrBuilder();
+  dk.via.sdj3_kursusopgave_part2.ProductListMessageOrBuilder getProductOrBuilder();
 }

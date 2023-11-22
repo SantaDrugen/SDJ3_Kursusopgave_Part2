@@ -1,7 +1,7 @@
 package dk.via.sdj3_kursusopgave_part2.SlaughterHouseStack.SlaughterBusinessServer.Controllers;
 
 import dk.via.sdj3_kursusopgave_part2.Shared.Domain.AnimalCut;
-import dk.via.sdj3_kursusopgave_part2.SlaughterHouseStack.IServer;
+import dk.via.sdj3_kursusopgave_part2.SlaughterHouseStack.SlaughterBusinessServer.ISlaughterBusinessClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.ResponseEntity;
@@ -13,10 +13,10 @@ import java.util.Collection;
 @RequestMapping("/slaughter")
 public class SlaughterController {
 
-    private final IServer server;
+    private final ISlaughterBusinessClient server;
 
     @Autowired
-    public SlaughterController(@Qualifier("SlaughterBusinessClient") IServer server){
+    public SlaughterController(@Qualifier("SlaughterBusinessClient") ISlaughterBusinessClient server){
         this.server = server;
     }
 

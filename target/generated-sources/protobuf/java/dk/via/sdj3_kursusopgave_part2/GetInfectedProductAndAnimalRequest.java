@@ -69,12 +69,12 @@ public  final class GetInfectedProductAndAnimalRequest extends
   }
   public static final com.google.protobuf.Descriptors.Descriptor
       getDescriptor() {
-    return dk.via.sdj3_kursusopgave_part2.FactoryService.internal_static_dk_via_sdj3_kursusopgave_part2_GetInfectedProductAndAnimalRequest_descriptor;
+    return dk.via.sdj3_kursusopgave_part2.FactoryServiceOuterClass.internal_static_dk_via_sdj3_kursusopgave_part2_GetInfectedProductAndAnimalRequest_descriptor;
   }
 
   protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internalGetFieldAccessorTable() {
-    return dk.via.sdj3_kursusopgave_part2.FactoryService.internal_static_dk_via_sdj3_kursusopgave_part2_GetInfectedProductAndAnimalRequest_fieldAccessorTable
+    return dk.via.sdj3_kursusopgave_part2.FactoryServiceOuterClass.internal_static_dk_via_sdj3_kursusopgave_part2_GetInfectedProductAndAnimalRequest_fieldAccessorTable
         .ensureFieldAccessorsInitialized(
             dk.via.sdj3_kursusopgave_part2.GetInfectedProductAndAnimalRequest.class, dk.via.sdj3_kursusopgave_part2.GetInfectedProductAndAnimalRequest.Builder.class);
   }
@@ -314,12 +314,12 @@ public  final class GetInfectedProductAndAnimalRequest extends
       dk.via.sdj3_kursusopgave_part2.GetInfectedProductAndAnimalRequestOrBuilder {
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return dk.via.sdj3_kursusopgave_part2.FactoryService.internal_static_dk_via_sdj3_kursusopgave_part2_GetInfectedProductAndAnimalRequest_descriptor;
+      return dk.via.sdj3_kursusopgave_part2.FactoryServiceOuterClass.internal_static_dk_via_sdj3_kursusopgave_part2_GetInfectedProductAndAnimalRequest_descriptor;
     }
 
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return dk.via.sdj3_kursusopgave_part2.FactoryService.internal_static_dk_via_sdj3_kursusopgave_part2_GetInfectedProductAndAnimalRequest_fieldAccessorTable
+      return dk.via.sdj3_kursusopgave_part2.FactoryServiceOuterClass.internal_static_dk_via_sdj3_kursusopgave_part2_GetInfectedProductAndAnimalRequest_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
               dk.via.sdj3_kursusopgave_part2.GetInfectedProductAndAnimalRequest.class, dk.via.sdj3_kursusopgave_part2.GetInfectedProductAndAnimalRequest.Builder.class);
     }
@@ -350,7 +350,7 @@ public  final class GetInfectedProductAndAnimalRequest extends
 
     public com.google.protobuf.Descriptors.Descriptor
         getDescriptorForType() {
-      return dk.via.sdj3_kursusopgave_part2.FactoryService.internal_static_dk_via_sdj3_kursusopgave_part2_GetInfectedProductAndAnimalRequest_descriptor;
+      return dk.via.sdj3_kursusopgave_part2.FactoryServiceOuterClass.internal_static_dk_via_sdj3_kursusopgave_part2_GetInfectedProductAndAnimalRequest_descriptor;
     }
 
     public dk.via.sdj3_kursusopgave_part2.GetInfectedProductAndAnimalRequest getDefaultInstanceForType() {
