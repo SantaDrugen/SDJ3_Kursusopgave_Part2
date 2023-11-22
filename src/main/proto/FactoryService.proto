@@ -7,10 +7,18 @@ message AnimalList {
   repeated string animalId = 1;
 }
 
-message ProductList {
-  repeated string productId = 1;
+message cutProductMessage{
+  repeated string cutId = 1;
 }
 
+message ProductMessage {
+  string productId = 1;
+  repeated cutProductMessage cuts = 2;
+}
+
+message ProductList {
+  repeated ProductList products = 1;
+}
 
 message GetInfectedProductAndAnimalRequest {
   string animalId = 1;
