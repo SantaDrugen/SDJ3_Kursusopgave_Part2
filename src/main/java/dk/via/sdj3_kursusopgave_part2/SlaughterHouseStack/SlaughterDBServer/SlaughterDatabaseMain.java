@@ -1,14 +1,14 @@
-package dk.via.sdj3_kursusopgave_part2.SlaughterHouseStack.BusinessServer_Actually_DB_Server;
+package dk.via.sdj3_kursusopgave_part2.SlaughterHouseStack.SlaughterDBServer;
 
 import io.grpc.Server;
 
 import java.io.IOException;
 
-public class Slaughter_Business_Server {
+public class SlaughterDatabaseMain {
     public static void main(String[] args) {
         Server server = io.grpc.ServerBuilder
                 .forPort(1234)
-                .addService(new Server_GRPC_Client())
+                .addService(new SlaughterDatabaseServer())
                 .build();
         try {
             server.start();

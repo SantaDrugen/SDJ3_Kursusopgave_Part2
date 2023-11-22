@@ -1,13 +1,11 @@
-package dk.via.sdj3_kursusopgave_part2.SlaughterHouseStack.WebAPIClient.Controllers;
+package dk.via.sdj3_kursusopgave_part2.SlaughterHouseStack.SlaughterBusinessServer.Controllers;
 
 import dk.via.sdj3_kursusopgave_part2.Shared.Domain.AnimalCut;
 import dk.via.sdj3_kursusopgave_part2.SlaughterHouseStack.IServer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
 
@@ -18,7 +16,7 @@ public class SlaughterController {
     private final IServer server;
 
     @Autowired
-    public SlaughterController(@Qualifier("webAPI_grpc_client") IServer server){
+    public SlaughterController(@Qualifier("SlaughterBusinessClient") IServer server){
         this.server = server;
     }
 
@@ -27,5 +25,12 @@ public class SlaughterController {
     {
         Collection<AnimalCut> body = server.getAllAnimalCuts();
         return ResponseEntity.ok().body(body);
+    }
+
+    @PostMapping
+    public ResponseEntity<String> slaughterAnimal(@RequestBody String id)
+    {
+        String result = server.slaughterAnimal(id);
+        return ResponseEntity.ok().body(result);
     }
 }

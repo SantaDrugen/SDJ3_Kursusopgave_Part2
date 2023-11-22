@@ -9,12 +9,23 @@ public class Animal implements Serializable {
     private String animalId;
     private String date;
 
+    private Boolean isSlaughtered;
+
     public Animal(Farm farm, double weight) {
         this.farm = farm;
         this.weight = weight;
+        this.isSlaughtered = false;
     }
 
     public Animal() {
+    }
+
+    public void setIsSlaughtered(Boolean isSlaughtered) {
+        this.isSlaughtered = isSlaughtered;
+    }
+
+    public Boolean getIsSlaughtered() {
+        return isSlaughtered;
     }
 
     public Farm getFarm() {

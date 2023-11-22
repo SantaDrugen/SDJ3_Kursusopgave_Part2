@@ -1,6 +1,8 @@
 package dk.via.sdj3_kursusopgave_part2.Shared.Domain;
 
-public class AnimalCut {
+import java.io.Serializable;
+
+public class AnimalCut implements Serializable {
 
     private String cutId;
 

@@ -1,8 +1,9 @@
 package dk.via.sdj3_kursusopgave_part2.Shared.Domain;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class SlaughteredAnimal {
+public class SlaughteredAnimal implements Serializable {
 
 
     ArrayList<AnimalCut> animalCutNumbers;

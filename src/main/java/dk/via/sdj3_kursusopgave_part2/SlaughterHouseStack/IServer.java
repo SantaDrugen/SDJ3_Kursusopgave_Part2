@@ -9,4 +9,6 @@ import java.util.Collection;
 public interface IServer {
 
     Collection<AnimalCut> getAllAnimalCuts();
+
+    String slaughterAnimal(String id);
 }

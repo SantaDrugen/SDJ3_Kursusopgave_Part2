@@ -3,17 +3,49 @@ option java_multiple_files = true;
 
 package dk.via.sdj3_kursusopgave_part2;
 
-message AnimalCut {
+message AnimalCutMessage {
   string cutId = 1;
 }
 
-message GetAllAnimalCutsResponse {
-  repeated AnimalCut animalCuts = 1;
+message SlaughterFarmMessage{
+  string farmName = 1;
+  int32 farmId = 2;
 }
 
- message GetAllAnimalCutsRequest {
+message SlaughterAnimalMessage {
+  SlaughterFarmMessage farm = 1;
+  double weight = 2;
+  string slaughterAnimalId = 3;
+  string date = 4;
+}
+
+message GetAllAnimalCutsResponse {
+  repeated AnimalCutMessage animalCuts = 1;
+}
+
+message GetAllAnimalCutsRequest {
+}
+
+message SlaughterAnimalRequest {
+  string id = 1;
+}
+
+message SlaughterAnimalResponse {
+  SlaughterAnimalMessage animal = 1;
+}
+
+message SaveAnimalCutRequest {
+  repeated AnimalCutMessage animalCuts = 1;
+}
+
+message SaveAnimalCutResponse {
+  string message = 1;
 }
 
 service SlaughterService {
   rpc GetAllAnimalCuts(GetAllAnimalCutsRequest) returns (GetAllAnimalCutsResponse);
+  rpc SlaughterAnimal(SlaughterAnimalRequest) returns (SlaughterAnimalResponse);
+  rpc SaveAnimalCut(SaveAnimalCutRequest) returns (SaveAnimalCutResponse);
 }
+
+
