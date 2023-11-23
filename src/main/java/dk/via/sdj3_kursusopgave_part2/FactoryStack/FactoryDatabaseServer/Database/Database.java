@@ -34,16 +34,19 @@ public class Database {
         }
     }
 
-    public synchronized void insertProduct(InsertProductDto product) {
+    public synchronized Product insertProduct(InsertProductDto product) {
         String sql = "INSERT INTO Product (animalCuts) VALUES ('" + product.getCutIds() + "');";
+        Product productToReturn = null;
         try
         {
             connection.createStatement().execute(sql);
+            productToReturn = getLastAddedProduct();
         }
         catch (Exception e)
         {
             e.printStackTrace();
         }
+        return productToReturn;
     }
 
     public synchronized ArrayList<Product> getAllProducts()
@@ -70,5 +73,35 @@ public class Database {
         }
 
         return products;
+    }
+
+    private Product getLastAddedProduct()
+    {
+        String sql = "SELECT * FROM Product ORDER BY id DESC LIMIT 1";
+        Product productToReturn = null;
+        try
+        {
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            Product product = new Product(new ArrayList<>());
+            while (resultSet.next())
+            {
+                int id = resultSet.getInt("id");
+                Array cutIdsArray = resultSet.getArray("cutIds");
+                String[] cutIds = (String[]) cutIdsArray.getArray();
+
+                for (String cutId : cutIds)
+                {
+                    product.addAnimalCut(cutId);
+                }
+                product.setProductId(String.valueOf(id));
+                productToReturn = product;
+            }
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        return productToReturn;
     }
 }

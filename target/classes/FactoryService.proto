@@ -3,7 +3,7 @@ option java_multiple_files = true;
 
 package dk.via.sdj3_kursusopgave_part2;
 
-message AnimalList {
+message AnimalListMessage {
   repeated string animalId = 1;
 }
 
@@ -20,14 +20,12 @@ message ProductListMessage {
   repeated ProductMessage products = 1;
 }
 
-message GetInfectedProductAndAnimalRequest {
-  string animalId = 1;
-  string productId = 2;
+message GetInfectedItemsRequest {
+  string productId = 1;
 }
 
-message GetInfectedProductAndAnimalResponse {
-  AnimalList animal = 1;
-  ProductListMessage product = 2;
+message GetInfectedItemsResponse {
+  repeated string animalIds = 1;
 }
 
 message GetAllProductsRequest {
@@ -37,28 +35,21 @@ message CreateProductRequest {
 }
 
 message CreateProductResponse {
-  repeated string cutIds = 1;
-}
-
-message CreateProductIdRequest{
-}
-
-message CreateProductIdResponse{
   string productId = 1;
 }
 
-message SaveProductChangesRequest{
-  ProductMessage product = 1;
+
+message GetAllProductsOfAnimalRequest{
+  string animalId = 1;
 }
 
-message SaveProductChangesResponse{
-  string message = 1;
+message GetAllProductsOfAnimalResponse{
+  repeated string productIds = 1;
 }
 
 service FactoryService {
-  rpc getInfectedProductAndAnimal(GetInfectedProductAndAnimalRequest) returns (GetInfectedProductAndAnimalResponse);
+  rpc getInfectedItems(GetInfectedItemsRequest) returns (GetInfectedItemsResponse);
   rpc getAllProducts(GetAllProductsRequest) returns (ProductListMessage);
   rpc createProduct(CreateProductRequest) returns (CreateProductResponse);
-  rpc createProductId(CreateProductIdRequest) returns (CreateProductIdResponse);
-  rpc saveProductChanges(SaveProductChangesRequest) returns (SaveProductChangesResponse);
+  rpc getAllProductsOfAnimal(GetAllProductsOfAnimalRequest) returns (GetAllProductsOfAnimalResponse);
 }

@@ -2,6 +2,9 @@ package dk.via.sdj3_kursusopgave_part2.FactoryStack.FactoryDatabaseServer.Server
 
 import dk.via.sdj3_kursusopgave_part2.*;
 import dk.via.sdj3_kursusopgave_part2.FactoryStack.FactoryDatabaseServer.Database.Database;
+import dk.via.sdj3_kursusopgave_part2.FactoryStack.FactoryDatabaseServer.Database.FileIO;
+import dk.via.sdj3_kursusopgave_part2.FactoryStack.FactoryDatabaseServer.Database.IFileIO;
+import dk.via.sdj3_kursusopgave_part2.Shared.DTOs.InsertProductDto;
 import dk.via.sdj3_kursusopgave_part2.Shared.Domain.AnimalCut;
 import dk.via.sdj3_kursusopgave_part2.Shared.Domain.Product;
 import io.grpc.stub.StreamObserver;
@@ -17,10 +20,13 @@ public class FactoryDatabaseServer extends FactoryServiceGrpc.FactoryServiceImpl
 
     private Database database;
 
+    private IFileIO fileIO;
+
     public FactoryDatabaseServer() {
+        fileIO = new FileIO();
         database = new Database();
-        products = database.getAllProducts(); // Load from database
-        cutsForPackaging = new ArrayList<>();
+        products = database.getAllProducts();
+        cutsForPackaging = fileIO.loadAnimalCutsForPackaging();
     }
 
     @Override
@@ -56,52 +62,34 @@ public class FactoryDatabaseServer extends FactoryServiceGrpc.FactoryServiceImpl
     {
 
         Random random = new Random();
-        int numberOfCuts = random.nextInt(6) + 1;
+        int numberOfCuts = random.nextInt(cutsForPackaging.size());
 
-        ArrayList<AnimalCut> animalCuts = new ArrayList<>();
+        if (numberOfCuts > 1)
+        {
+            ArrayList<String> animalCutIds = new ArrayList<>();
 
-        for (int i = 0; i < numberOfCuts; i++) {
-            animalCuts.add(cutsForPackaging.get(0));
-            cutsForPackaging.remove(0);
+            for (int i = 0; i < numberOfCuts; i++) {
+                animalCutIds.add(cutsForPackaging.get(0).getCutId());
+                cutsForPackaging.remove(0);
+            }
+
+            InsertProductDto productToInsert = new InsertProductDto(animalCutIds);
+            Product productToAdd = database.insertProduct(productToInsert);
+            products.add(productToAdd);
+
+
+            CreateProductResponse response = CreateProductResponse
+                    .newBuilder()
+                    .setProductId(productToAdd.getProductId())
+                    .build();
+
+            responseObserver.onNext(response);
+            responseObserver.onCompleted();
         }
-
-
-    }
-
-    @Override
-    public void createProductId(CreateProductIdRequest request,
-                                StreamObserver<CreateProductIdResponse> responseObserver) {
-        java.lang.String productId = generateProductId();
-        CreateProductIdResponse response = CreateProductIdResponse
-                .newBuilder()
-                .setProductId(productId)
-                .build();
-        responseObserver.onNext(response);
-        responseObserver.onCompleted();
-    }
-
-    @Override
-    public void saveProductChanges(SaveProductChangesRequest request,
-                                   StreamObserver<SaveProductChangesResponse> responseObserver) {
-        Product product = new Product(new ArrayList<>());
-
-        for (CutProductMessage cut : request.getProduct().getCutsList()) {
-            product.getAnimalCuts().add(new AnimalCut(cut.getCutId()));
+        else
+        {
+            throw new IllegalArgumentException("Not enough cuts for packaging");
         }
-
-        product.setProductId(request.getProduct().getProductId());
-
-        products.add(product);
-
-        //TODO save to database
-
-        SaveProductChangesResponse response = SaveProductChangesResponse
-                .newBuilder()
-                .setMessage("Product saved")
-                .build();
-
-        responseObserver.onNext(response);
-        responseObserver.onCompleted();
     }
 
     @Override

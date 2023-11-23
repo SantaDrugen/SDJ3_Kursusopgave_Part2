@@ -31,7 +31,7 @@ public class FactoryBusinessClient implements IFactoryBusinessClient {
 
         GetInfectedItemsResponse response = stub.getInfectedItems(request);
 
-        ArrayList<java.lang.String> animalIds = new ArrayList<>();
+        ArrayList<String> animalIds = new ArrayList<>();
 
         animalIds = (ArrayList<java.lang.String>) response.getAnimalIdsList();
 
@@ -69,7 +69,7 @@ public class FactoryBusinessClient implements IFactoryBusinessClient {
     }
 
     @Override
-    public java.lang.String createProduct() {
+    public String createProduct() {
         ManagedChannel channel = getChannel();
 
         FactoryServiceGrpc.FactoryServiceBlockingStub stub
@@ -81,19 +81,7 @@ public class FactoryBusinessClient implements IFactoryBusinessClient {
 
         CreateProductResponse response = stub.createProduct(request);
 
-        ArrayList<AnimalCut> cutIds = new ArrayList<>();
-
-        for (String o : response.getCutIdsList()) {
-            cutIds.add(new AnimalCut(o));
-        }
-
-        Product productToCreate = new Product(cutIds);
-
-        productToCreate.setProductId(createProductId());
-
-        java.lang.String message = SaveProductChanges(productToCreate);
-
-        return message;
+        return response.getProductId();
     }
 
     @Override
@@ -112,57 +100,6 @@ public class FactoryBusinessClient implements IFactoryBusinessClient {
 
         return (ArrayList<String>) response.getProductIdsList();
     }
-
-    private java.lang.String createProductId() {
-
-        //TODO: Set id type to int, and have postgreSQL generate ID.
-        ManagedChannel channel = getChannel();
-
-        FactoryServiceGrpc.FactoryServiceBlockingStub stub
-                = FactoryServiceGrpc.newBlockingStub(channel);
-
-        CreateProductIdRequest request = CreateProductIdRequest
-                .newBuilder()
-                .build();
-
-        CreateProductIdResponse response = stub.createProductId(request);
-
-        return response.getProductId();
-    }
-
-
-    public java.lang.String SaveProductChanges(Product product) {
-
-        //TODO: Remove this method, and have postgreSQL generate ID.
-        ManagedChannel channel = getChannel();
-
-        FactoryServiceGrpc.FactoryServiceBlockingStub stub
-                = FactoryServiceGrpc.newBlockingStub(channel);
-
-        ProductMessage.Builder productBuilder = ProductMessage.newBuilder();
-
-        productBuilder.setProductId(product.getProductId());
-
-        for (AnimalCut animalCut : product.getAnimalCuts()) {
-            CutProductMessage.Builder cutBuilder
-                    = CutProductMessage.newBuilder();
-
-            cutBuilder.setCutId(animalCut.getCutId());
-
-            productBuilder.addCuts(cutBuilder);
-        }
-
-        SaveProductChangesRequest request = SaveProductChangesRequest
-                .newBuilder()
-                .setProduct(productBuilder)
-                .build();
-
-
-        SaveProductChangesResponse response = stub.saveProductChanges(request);
-
-        return response.getMessage();
-    }
-
 
 
     private ManagedChannel getChannel() {
