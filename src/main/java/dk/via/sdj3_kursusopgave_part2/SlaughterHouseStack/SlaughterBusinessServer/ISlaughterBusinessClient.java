@@ -10,5 +10,5 @@ public interface ISlaughterBusinessClient {
 
     Collection<AnimalCut> getAllAnimalCuts();
 
-    String slaughterAnimal(String id);
+    java.lang.String slaughterAnimal(java.lang.String id);
 }

@@ -1,6 +1,5 @@
-package dk.via.sdj3_kursusopgave_part2.FactoryStack.FactoryDatabaseServer;
+package dk.via.sdj3_kursusopgave_part2.FactoryStack.FactoryDatabaseServer.Server;
 
-import dk.via.sdj3_kursusopgave_part2.SlaughterHouseStack.SlaughterDBServer.SlaughterDatabaseServer;
 import io.grpc.Server;
 
 import java.io.IOException;

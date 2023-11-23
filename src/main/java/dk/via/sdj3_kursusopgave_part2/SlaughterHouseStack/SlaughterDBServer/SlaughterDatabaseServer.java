@@ -1,11 +1,7 @@
 package dk.via.sdj3_kursusopgave_part2.SlaughterHouseStack.SlaughterDBServer;
 import dk.via.sdj3_kursusopgave_part2.*;
-import dk.via.sdj3_kursusopgave_part2.Shared.DTOs.SlaughterAnimalDTO;
 import dk.via.sdj3_kursusopgave_part2.Shared.Domain.AnimalCut;
 import dk.via.sdj3_kursusopgave_part2.Shared.Domain.Animal;
-import dk.via.sdj3_kursusopgave_part2.Shared.Domain.Farm;
-import dk.via.sdj3_kursusopgave_part2.Shared.Domain.SlaughteredAnimal;
-import io.grpc.ManagedChannel;
 import io.grpc.stub.StreamObserver;
 
 import java.util.ArrayList;

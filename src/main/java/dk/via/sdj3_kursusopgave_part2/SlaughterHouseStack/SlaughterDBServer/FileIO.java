@@ -8,9 +8,9 @@ import java.util.ArrayList;
 
 public class FileIO implements IFileIO {
 
-    private static final String FILEPATHANIMALCUTS = "src/main/java/dk/via/sdj3_kursusopgave_part2/SlaughterHouseStack/SlaughterDBServer/slaughteredAnimals.ser";
+    private static final java.lang.String FILEPATHANIMALCUTS = "src/main/java/dk/via/sdj3_kursusopgave_part2/SlaughterHouseStack/SlaughterDBServer/slaughteredAnimals.ser";
 
-    private static final String FILEPATHANIMALSTOSLAUGHTER = "src/main/java/dk/via/sdj3_kursusopgave_part2/SlaughterHouseStack/SlaughterDBServer/animalsToSlaughter.ser";
+    private static final java.lang.String FILEPATHANIMALSTOSLAUGHTER = "src/main/java/dk/via/sdj3_kursusopgave_part2/SlaughterHouseStack/SlaughterDBServer/animalsToSlaughter.ser";
 
     private FileOutputStream fileOutputStreamAnimalCuts;
     private ObjectOutputStream animalCutsOut;

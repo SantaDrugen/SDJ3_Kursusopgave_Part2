@@ -46,7 +46,7 @@ public class SlaughterBusinessClient implements ISlaughterBusinessClient {
     }
 
     @Override
-    public String slaughterAnimal(String id) {
+    public java.lang.String slaughterAnimal(java.lang.String id) {
         ManagedChannel channel = getChannel();
 
         SlaughterServiceGrpc.SlaughterServiceBlockingStub stub
@@ -69,7 +69,7 @@ public class SlaughterBusinessClient implements ISlaughterBusinessClient {
         return cutAnimalForSlaughtering(animalToSlaughter);
     }
 
-    private String cutAnimalForSlaughtering(Animal animal) {
+    private java.lang.String cutAnimalForSlaughtering(Animal animal) {
         ManagedChannel channel = getChannel();
 
         SlaughterServiceGrpc.SlaughterServiceBlockingStub stub
@@ -86,8 +86,8 @@ public class SlaughterBusinessClient implements ISlaughterBusinessClient {
         ArrayList<AnimalCut> cuts = new ArrayList<>();
 
         for (int i = 0; i < partCounter; i++) {
-            String cutId = String.valueOf(animal.getAnimalId());
-            cutId += "-" + String.valueOf(i);
+            java.lang.String cutId = java.lang.String.valueOf(animal.getAnimalId());
+            cutId += "-" + java.lang.String.valueOf(i);
             cuts.add(new AnimalCut(cutId));
         }
 

@@ -1,7 +1,5 @@
 package dk.via.sdj3_kursusopgave_part2.Shared.Domain;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 import java.io.Serializable;
 
 public class Farm implements Serializable {

@@ -28,9 +28,9 @@ public class SlaughterController {
     }
 
     @PostMapping
-    public ResponseEntity<String> slaughterAnimal(@RequestBody String id)
+    public ResponseEntity<java.lang.String> slaughterAnimal(@RequestBody java.lang.String id)
     {
-        String result = server.slaughterAnimal(id);
+        java.lang.String result = server.slaughterAnimal(id);
         return ResponseEntity.ok().body(result);
     }
 }

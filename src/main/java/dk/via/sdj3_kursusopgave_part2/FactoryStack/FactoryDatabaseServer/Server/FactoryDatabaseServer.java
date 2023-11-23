@@ -1,7 +1,7 @@
-package dk.via.sdj3_kursusopgave_part2.FactoryStack.FactoryDatabaseServer;
+package dk.via.sdj3_kursusopgave_part2.FactoryStack.FactoryDatabaseServer.Server;
 
 import dk.via.sdj3_kursusopgave_part2.*;
-import dk.via.sdj3_kursusopgave_part2.Shared.Domain.Animal;
+import dk.via.sdj3_kursusopgave_part2.FactoryStack.FactoryDatabaseServer.Database.Database;
 import dk.via.sdj3_kursusopgave_part2.Shared.Domain.AnimalCut;
 import dk.via.sdj3_kursusopgave_part2.Shared.Domain.Product;
 import io.grpc.stub.StreamObserver;
@@ -15,9 +15,12 @@ public class FactoryDatabaseServer extends FactoryServiceGrpc.FactoryServiceImpl
 
     private ArrayList<AnimalCut> cutsForPackaging;
 
+    private Database database;
+
     public FactoryDatabaseServer() {
-        products = new ArrayList<>(); // Load from database
-        cutsForPackaging = new ArrayList<>(); // Load from database
+        database = new Database();
+        products = database.getAllProducts(); // Load from database
+        cutsForPackaging = new ArrayList<>();
     }
 
     @Override
@@ -68,7 +71,7 @@ public class FactoryDatabaseServer extends FactoryServiceGrpc.FactoryServiceImpl
     @Override
     public void createProductId(CreateProductIdRequest request,
                                 StreamObserver<CreateProductIdResponse> responseObserver) {
-        String productId = generateProductId();
+        java.lang.String productId = generateProductId();
         CreateProductIdResponse response = CreateProductIdResponse
                 .newBuilder()
                 .setProductId(productId)
@@ -101,14 +104,83 @@ public class FactoryDatabaseServer extends FactoryServiceGrpc.FactoryServiceImpl
         responseObserver.onCompleted();
     }
 
-    private String generateProductId() {
+    @Override
+    public void getInfectedItems(GetInfectedItemsRequest request,
+                                 StreamObserver<GetInfectedItemsResponse> responseObserver) {
+        Product productRecieved = new Product(new ArrayList<>());
+        for (Product product : products) {
+            if (product.getProductId().equals(request.getProductId()))
+            {
+                productRecieved = product;
+            }
+            else
+            {
+                throw new IllegalArgumentException("Product not found");
+            }
+        }
+
+        ArrayList<String> animalIds = extractAnimalIdsFromProduct(productRecieved);
+
+        GetInfectedItemsResponse response = GetInfectedItemsResponse
+                .newBuilder()
+                .addAllAnimalIds(animalIds)
+                .build();
+
+        responseObserver.onNext(response);
+        responseObserver.onCompleted();
+    }
+
+
+    @Override
+    public void getAllProductsOfAnimal(GetAllProductsOfAnimalRequest request,
+                                    StreamObserver<GetAllProductsOfAnimalResponse> responseObserver) {
+        ArrayList<String> productIdsOfAnimal = new ArrayList<>();
+        for (Product product : products) {
+            for (AnimalCut animalCut : product.getAnimalCuts()) {
+                if (extractAnimalIdFromAnimalCutId(animalCut.getCutId()).equals(request.getAnimalId())) {
+                    productIdsOfAnimal.add(product.getProductId());
+                }
+            }
+        }
+
+        GetAllProductsOfAnimalResponse response = GetAllProductsOfAnimalResponse
+                .newBuilder()
+                .addAllProductIds(productIdsOfAnimal)
+                .build();
+
+        responseObserver.onNext(response);
+        responseObserver.onCompleted();
+    }
+
+
+
+    private ArrayList<java.lang.String> extractAnimalIdsFromProduct(Product product) {
+        ArrayList<java.lang.String> animals = new ArrayList<>();
+        for (AnimalCut animalCut : product.getAnimalCuts()) {
+            animals.add(extractAnimalIdFromAnimalCutId(animalCut.getCutId()));
+        }
+        return animals;
+    }
+
+    private java.lang.String extractAnimalIdFromAnimalCutId(java.lang.String animalCutId) {
+        int hyphenIndex = animalCutId.indexOf('-');
+        if (hyphenIndex != -1) {
+            // Extract the substring before the hyphen
+            return animalCutId.substring(0, hyphenIndex);
+        } else {
+            // Return the original string if no hyphen is found
+            return animalCutId;
+        }
+    }
+
+    private java.lang.String generateProductId() {
         int currentHigestId = products.size();
         for (Product i : products) {
             if (Integer.parseInt(i.getProductId()) > currentHigestId) {
                 currentHigestId = Integer.parseInt(i.getProductId());
             }
         }
-        return String.valueOf(++currentHigestId);
+        return java.lang.String.valueOf(++currentHigestId);
     }
 
 }

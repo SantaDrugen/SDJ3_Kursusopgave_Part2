@@ -1,8 +1,8 @@
 package dk.via.sdj3_kursusopgave_part2.FactoryStack.FactoryBusinessServer;
 
 import dk.via.sdj3_kursusopgave_part2.*;
-import dk.via.sdj3_kursusopgave_part2.Shared.DTOs.InfectedItemsDto;
-import dk.via.sdj3_kursusopgave_part2.Shared.Domain.Animal;
+import dk.via.sdj3_kursusopgave_part2.Shared.DTOs.AnimalIdsOfProductDto;
+import dk.via.sdj3_kursusopgave_part2.Shared.DTOs.ProductsOfAnimalDto;
 import dk.via.sdj3_kursusopgave_part2.Shared.Domain.AnimalCut;
 import dk.via.sdj3_kursusopgave_part2.Shared.Domain.Product;
 import io.grpc.ManagedChannel;
@@ -18,8 +18,26 @@ public class FactoryBusinessClient implements IFactoryBusinessClient {
 
 
     @Override
-    public InfectedItemsDto getInfectedItems(String productId) {
-        return null;
+    public ArrayList<String> getAllAnimalsFromProduct(AnimalIdsOfProductDto animalIdsOfProductDto) {
+        ManagedChannel channel = getChannel();
+
+        FactoryServiceGrpc.FactoryServiceBlockingStub stub
+                = FactoryServiceGrpc.newBlockingStub(channel);
+
+        GetInfectedItemsRequest request = GetInfectedItemsRequest
+                .newBuilder()
+                .setProductId(animalIdsOfProductDto.getProductId())
+                .build();
+
+        GetInfectedItemsResponse response = stub.getInfectedItems(request);
+
+        ArrayList<java.lang.String> animalIds = new ArrayList<>();
+
+        animalIds = (ArrayList<java.lang.String>) response.getAnimalIdsList();
+
+
+
+        return animalIds;
     }
 
     @Override
@@ -51,7 +69,7 @@ public class FactoryBusinessClient implements IFactoryBusinessClient {
     }
 
     @Override
-    public String createProduct() {
+    public java.lang.String createProduct() {
         ManagedChannel channel = getChannel();
 
         FactoryServiceGrpc.FactoryServiceBlockingStub stub
@@ -73,12 +91,31 @@ public class FactoryBusinessClient implements IFactoryBusinessClient {
 
         productToCreate.setProductId(createProductId());
 
-        String message = SaveProductChanges(productToCreate);
+        java.lang.String message = SaveProductChanges(productToCreate);
 
         return message;
     }
 
-    private String createProductId() {
+    @Override
+    public ArrayList<String> getAllProductsOfAnimal(ProductsOfAnimalDto productsOfAnimalDto) {
+        ManagedChannel channel = getChannel();
+
+        FactoryServiceGrpc.FactoryServiceBlockingStub stub
+                = FactoryServiceGrpc.newBlockingStub(channel);
+
+        GetAllProductsOfAnimalRequest request = GetAllProductsOfAnimalRequest
+                .newBuilder()
+                .setAnimalId(productsOfAnimalDto.getAnimalId())
+                .build();
+
+        GetAllProductsOfAnimalResponse response = stub.getAllProductsOfAnimal(request);
+
+        return (ArrayList<String>) response.getProductIdsList();
+    }
+
+    private java.lang.String createProductId() {
+
+        //TODO: Set id type to int, and have postgreSQL generate ID.
         ManagedChannel channel = getChannel();
 
         FactoryServiceGrpc.FactoryServiceBlockingStub stub
@@ -94,7 +131,9 @@ public class FactoryBusinessClient implements IFactoryBusinessClient {
     }
 
 
-    public String SaveProductChanges(Product product) {
+    public java.lang.String SaveProductChanges(Product product) {
+
+        //TODO: Remove this method, and have postgreSQL generate ID.
         ManagedChannel channel = getChannel();
 
         FactoryServiceGrpc.FactoryServiceBlockingStub stub
@@ -123,6 +162,8 @@ public class FactoryBusinessClient implements IFactoryBusinessClient {
 
         return response.getMessage();
     }
+
+
 
     private ManagedChannel getChannel() {
         return ManagedChannelBuilder

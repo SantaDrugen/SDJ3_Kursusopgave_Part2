@@ -25,8 +25,8 @@ public class SlaughterHouseDatabaseServer {
 
         for ( int i = 0; i < partCounter; i++)
         {
-            String cutId = String.valueOf(dto.getAnimalId());
-            cutId += "-" + String.valueOf(i);
+            java.lang.String cutId = java.lang.String.valueOf(dto.getAnimalId());
+            cutId += "-" + java.lang.String.valueOf(i);
             cuts.add(new AnimalCut(cutId));
         }
 
