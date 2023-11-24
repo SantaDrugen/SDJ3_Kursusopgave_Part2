@@ -33,9 +33,10 @@ public class FactoryBusinessClient implements IFactoryBusinessClient {
 
         ArrayList<String> animalIds = new ArrayList<>();
 
-        animalIds = (ArrayList<java.lang.String>) response.getAnimalIdsList();
-
-
+        for (String o : response.getAnimalIdsList()) {
+            if (!animalIds.contains(o))
+                animalIds.add(o);
+        }
 
         return animalIds;
     }
@@ -98,7 +99,12 @@ public class FactoryBusinessClient implements IFactoryBusinessClient {
 
         GetAllProductsOfAnimalResponse response = stub.getAllProductsOfAnimal(request);
 
-        return (ArrayList<String>) response.getProductIdsList();
+        ArrayList<String> productIds = new ArrayList<>();
+        for(String o : response.getProductIdsList()) {
+            if (!productIds.contains(o))
+                productIds.add(o);
+        }
+        return productIds;
     }
 
 

@@ -11,6 +11,9 @@ public class AnimalCut implements Serializable {
         this.cutId = cutId;
     }
 
+    public AnimalCut() {
+    }
+
     public String getCutId() {
         return cutId;
     }

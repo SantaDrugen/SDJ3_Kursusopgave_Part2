@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 public class FileIO implements IFileIO{
 
-    private final String FILEPATH = "dk/via/sdj3_kursusopgave_part2/FactoryStack/FactoryDatabaseServer/Database/Database.AnimalCutForPackaging.ser";
+    private final String FILEPATH = "src/main/java/dk/via/sdj3_kursusopgave_part2/FactoryStack/FactoryDatabaseServer/Database/Database.AnimalCutForPackaging.ser";
 
     private FileOutputStream fileOutputStream;
     private ObjectOutputStream animalCutOut;
@@ -59,5 +59,19 @@ public class FileIO implements IFileIO{
             throw new RuntimeException(e);
         }
         return animalCuts;
+    }
+
+    @Override
+    public void addAnimalCuts(ArrayList<AnimalCut> animalCuts) {
+        try {
+            fileOutputStream = new FileOutputStream(FILEPATH);
+            animalCutOut = new ObjectOutputStream(fileOutputStream);
+            animalCutOut.writeObject(animalCuts);
+            animalCutOut.close();
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

@@ -35,18 +35,23 @@ public class Database {
     }
 
     public synchronized Product insertProduct(InsertProductDto product) {
-        String sql = "INSERT INTO Product (animalCuts) VALUES ('" + product.getCutIds() + "');";
-        Product productToReturn = null;
-        try
-        {
-            connection.createStatement().execute(sql);
-            productToReturn = getLastAddedProduct();
+        String SQL = "INSERT INTO product(animalCuts) VALUES (?::text[])";
+
+        try (PreparedStatement pstmt = connection.prepareStatement(SQL)) {
+
+            // Converting ArrayList<String> to String Array
+            String[] cutIdsArray = new String[product.getCutIds().size()];
+            cutIdsArray = product.getCutIds().toArray(cutIdsArray);
+
+            // Setting Array to PreparedStatement
+            pstmt.setArray(1, connection.createArrayOf("text", cutIdsArray));
+            pstmt.executeUpdate();
+
+            return getLastAddedProduct();
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
         }
-        catch (Exception e)
-        {
-            e.printStackTrace();
-        }
-        return productToReturn;
+        return null;
     }
 
     public synchronized ArrayList<Product> getAllProducts()
@@ -58,7 +63,7 @@ public class Database {
 
             while (resultSet.next()) {
                 int id = resultSet.getInt("id");
-                Array cutIdsArray = resultSet.getArray("cutIds");
+                Array cutIdsArray = resultSet.getArray("animalCuts");
                 String[] cutIds = (String[]) cutIdsArray.getArray();
 
                 Product product = new Product(new ArrayList<>());
@@ -87,7 +92,7 @@ public class Database {
             while (resultSet.next())
             {
                 int id = resultSet.getInt("id");
-                Array cutIdsArray = resultSet.getArray("cutIds");
+                Array cutIdsArray = resultSet.getArray("animalCuts");
                 String[] cutIds = (String[]) cutIdsArray.getArray();
 
                 for (String cutId : cutIds)

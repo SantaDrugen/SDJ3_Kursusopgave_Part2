@@ -8,14 +8,14 @@ public class DatabaseSetupMain {
         try {
             Connection connection = DatabaseConnection.connect();
 
-            String sql = "CREATE TABLE Product ( " +
-                    "id serial PRIMARY KEY, " +
-                    "animalCuts TEXT[] " +
-                    ");";
-
-            connection
-                    .createStatement()
-                    .execute(sql);
+//            String sql = "CREATE TABLE Product ( " +
+//                    "id serial PRIMARY KEY, " +
+//                    "animalCuts TEXT[] " +
+//                    ");";
+//
+//            connection
+//                    .createStatement()
+//                    .execute(sql);
 
         } catch (Exception e) {
             e.printStackTrace();

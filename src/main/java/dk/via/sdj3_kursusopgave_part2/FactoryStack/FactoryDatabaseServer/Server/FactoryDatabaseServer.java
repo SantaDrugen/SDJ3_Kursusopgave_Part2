@@ -1,12 +1,18 @@
 package dk.via.sdj3_kursusopgave_part2.FactoryStack.FactoryDatabaseServer.Server;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import dk.via.sdj3_kursusopgave_part2.*;
 import dk.via.sdj3_kursusopgave_part2.FactoryStack.FactoryDatabaseServer.Database.Database;
 import dk.via.sdj3_kursusopgave_part2.FactoryStack.FactoryDatabaseServer.Database.FileIO;
 import dk.via.sdj3_kursusopgave_part2.FactoryStack.FactoryDatabaseServer.Database.IFileIO;
+import dk.via.sdj3_kursusopgave_part2.FactoryStack.FactoryDatabaseServer.Server.RabbitMQ.Receiver;
 import dk.via.sdj3_kursusopgave_part2.Shared.DTOs.InsertProductDto;
 import dk.via.sdj3_kursusopgave_part2.Shared.Domain.AnimalCut;
 import dk.via.sdj3_kursusopgave_part2.Shared.Domain.Product;
+import dk.via.sdj3_kursusopgave_part2.SlaughterHouseStack.SlaughterDBServer.RabbitMQ.Reciever;
 import io.grpc.stub.StreamObserver;
 
 import java.util.ArrayList;
@@ -16,17 +22,27 @@ public class FactoryDatabaseServer extends FactoryServiceGrpc.FactoryServiceImpl
 
     private ArrayList<Product> products;
 
-    private ArrayList<AnimalCut> cutsForPackaging;
+    private static ArrayList<AnimalCut> cutsForPackaging;
 
     private Database database;
 
-    private IFileIO fileIO;
+    private static IFileIO fileIO;
 
     public FactoryDatabaseServer() {
         fileIO = new FileIO();
         database = new Database();
         products = database.getAllProducts();
         cutsForPackaging = fileIO.loadAnimalCutsForPackaging();
+
+        new Thread(() -> {
+            Receiver receiver = new Receiver(this);
+            receiver.receive();
+        }).start();
+    }
+
+    public static void addAnimalCuts(ArrayList<AnimalCut> animalCuts) {
+        cutsForPackaging.addAll(animalCuts);
+        fileIO.addAnimalCuts(animalCuts);
     }
 
     @Override
@@ -100,10 +116,6 @@ public class FactoryDatabaseServer extends FactoryServiceGrpc.FactoryServiceImpl
             if (product.getProductId().equals(request.getProductId()))
             {
                 productRecieved = product;
-            }
-            else
-            {
-                throw new IllegalArgumentException("Product not found");
             }
         }
 

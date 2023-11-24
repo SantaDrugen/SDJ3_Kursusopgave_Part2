@@ -1,6 +1,7 @@
 package dk.via.sdj3_kursusopgave_part2.Shared.Domain;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 public class Farm implements Serializable {
 
@@ -29,5 +30,13 @@ public class Farm implements Serializable {
 
     public void setFarmName(String farmName) {
         this.farmName = farmName;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Farm farm = (Farm) o;
+        return farmId == farm.farmId && Objects.equals(farmName, farm.farmName);
     }
 }

@@ -1,6 +1,7 @@
 package dk.via.sdj3_kursusopgave_part2.AnimalStack.AnimalDBServer;
 
 import dk.via.sdj3_kursusopgave_part2.*;
+import dk.via.sdj3_kursusopgave_part2.AnimalStack.AnimalDBServer.RabbitMQ.Sender;
 import dk.via.sdj3_kursusopgave_part2.Shared.DTOs.AnimalDto;
 import dk.via.sdj3_kursusopgave_part2.Shared.DTOs.FarmDto;
 import dk.via.sdj3_kursusopgave_part2.Shared.Domain.Animal;
@@ -22,12 +23,15 @@ public class AnimalDatabaseServer extends AnimalServiceGrpc.AnimalServiceImplBas
     private Collection<Farm> farms;
     private Collection<Animal> animals;
     private IFileIO fileIO;
+    private Sender sender;
 
     public AnimalDatabaseServer() {
         this.farms = new ArrayList<>();
         this.fileIO = new FileIO();
         farms = fileIO.loadFarms();
         animals = fileIO.loadAnimals();
+        sender = new Sender();
+
     }
 
     public void createFarm(CreateFarmRequest request,
@@ -151,6 +155,7 @@ public class AnimalDatabaseServer extends AnimalServiceGrpc.AnimalServiceImplBas
                 .setMessage("Created, All OK")
                 .build();
 
+        sender.send(animalToAdd);
         responseObserver.onNext(response);
         responseObserver.onCompleted();
     }

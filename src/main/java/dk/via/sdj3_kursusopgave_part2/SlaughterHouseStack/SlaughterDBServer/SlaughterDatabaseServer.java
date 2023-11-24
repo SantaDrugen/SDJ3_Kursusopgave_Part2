@@ -1,16 +1,22 @@
 package dk.via.sdj3_kursusopgave_part2.SlaughterHouseStack.SlaughterDBServer;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import dk.via.sdj3_kursusopgave_part2.*;
 import dk.via.sdj3_kursusopgave_part2.Shared.Domain.AnimalCut;
 import dk.via.sdj3_kursusopgave_part2.Shared.Domain.Animal;
+import dk.via.sdj3_kursusopgave_part2.SlaughterHouseStack.SlaughterDBServer.RabbitMQ.Reciever;
+import dk.via.sdj3_kursusopgave_part2.SlaughterHouseStack.SlaughterDBServer.RabbitMQ.Sender;
 import io.grpc.stub.StreamObserver;
 
 import java.util.ArrayList;
 
 public class SlaughterDatabaseServer extends SlaughterServiceGrpc.SlaughterServiceImplBase {
 
-    private IFileIO fileIO;
+    private static IFileIO fileIO;
 
-    private ArrayList<Animal> animalsToSlaughter;
+    private static ArrayList<Animal> animalsToSlaughter;
 
     private ArrayList<AnimalCut> animalCuts;
 
@@ -19,6 +25,16 @@ public class SlaughterDatabaseServer extends SlaughterServiceGrpc.SlaughterServi
         this.fileIO = new FileIO();
         animalsToSlaughter = fileIO.loadAnimalsToSlaughter();
         animalCuts = fileIO.loadAnimalCuts();
+
+        new Thread(() -> {
+            Reciever reciever = new Reciever(this);
+            reciever.recieve();
+        }).start();
+    }
+
+    public static void addAnimal(Animal animal) {
+        animalsToSlaughter.add(animal);
+        fileIO.addAnimalsToSlaughter(animalsToSlaughter);
     }
 
     public void getAllAnimalCuts (GetAllAnimalCutsRequest request,
@@ -45,33 +61,41 @@ public class SlaughterDatabaseServer extends SlaughterServiceGrpc.SlaughterServi
 
     @Override
     public void slaughterAnimal (SlaughterAnimalRequest request,
-                                 StreamObserver<SlaughterAnimalResponse> responseObserver)
-    {
-        //TODO RABBITMQGETANIMAL
+                                 StreamObserver<SlaughterAnimalResponse> responseObserver) {
+
+        Animal animalToSlaughter = null;
+        for (Animal animal : animalsToSlaughter) {
+            if (animal.getAnimalId().equals(extractId(request.getId()))) {
+                animalToSlaughter = animal;
+            }
+        }
+
+        if (animalToSlaughter == null) {
+            throw new RuntimeException("Animal not found");
+        } else {
+            animalsToSlaughter.remove(animalToSlaughter);
+            SlaughterAnimalMessage animalToReturn = SlaughterAnimalMessage
+                    .newBuilder()
+                    .setFarm(SlaughterFarmMessage
+                            .newBuilder()
+                            .setFarmName(animalToSlaughter.getFarm().getFarmName())
+                            .setFarmId(animalToSlaughter.getFarm().getFarmId())
+                            .build())
+                    .setWeight(animalToSlaughter.getWeight())
+                    .setSlaughterAnimalId(animalToSlaughter.getAnimalId())
+                    .setDate(animalToSlaughter.getDate())
+                    .build();
+
+            SlaughterAnimalResponse response = SlaughterAnimalResponse
+                    .newBuilder()
+                    .setAnimal(animalToReturn)
+                    .build();
 
 
+            responseObserver.onNext(response);
+            responseObserver.onCompleted();
+        }
 
-        SlaughterAnimalMessage animalToReturn = SlaughterAnimalMessage
-                .newBuilder()
-                .setFarm(SlaughterFarmMessage
-                        .newBuilder()
-                        .setFarmName("Test")
-                        .setFarmId(10)
-                        .build())
-                .setWeight(200)
-                .setSlaughterAnimalId("1")
-                .setDate("2021-05-05")
-                .build();
-
-
-        SlaughterAnimalResponse response = SlaughterAnimalResponse
-                .newBuilder()
-                .setAnimal(animalToReturn)
-                .build();
-
-
-        responseObserver.onNext(response);
-        responseObserver.onCompleted();
     }
 
     @Override
@@ -85,6 +109,7 @@ public class SlaughterDatabaseServer extends SlaughterServiceGrpc.SlaughterServi
         }
 
         animalCuts.addAll(animalCutsToSave);
+        Sender.send(animalCutsToSave);
 
         fileIO.addAnimalCuts(animalCuts);
 
@@ -95,6 +120,18 @@ public class SlaughterDatabaseServer extends SlaughterServiceGrpc.SlaughterServi
 
         responseObserver.onNext(response);
         responseObserver.onCompleted();
+    }
+
+    private String extractId(String id) {
+        ObjectMapper mapper = new ObjectMapper();
+        try{
+            JsonNode node = mapper.readTree(id);
+            return node.path("id").asText();
+        } catch (JsonMappingException e) {
+            throw new RuntimeException(e);
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
     }
 
 }

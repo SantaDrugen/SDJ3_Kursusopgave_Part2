@@ -11,4 +11,6 @@ public interface IFileIO {
     public void removeAnimalCutForPackaging(AnimalCut animalCut);
 
     public ArrayList<AnimalCut> loadAnimalCutsForPackaging();
+
+    void addAnimalCuts(ArrayList<AnimalCut> animalCuts);
 }
